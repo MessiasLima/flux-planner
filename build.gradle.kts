@@ -4,15 +4,16 @@ version "1.0-SNAPSHOT"
 allprojects {
     repositories {
         google()
+        gradlePluginPortal()
         mavenCentral()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 
 plugins {
-    kotlin("multiplatform") apply false
-    kotlin("android") apply false
-    id("com.android.application") apply false
-    id("com.android.library") apply false
-    id("org.jetbrains.compose") apply false
+    kotlin(Kotlin.multiplatformPlugin) version Kotlin.version apply false
+    kotlin(Kotlin.androidPlugin) version Kotlin.version apply false
+    id(Android.Plugin.application) version Android.Plugin.version  apply false
+    id(Android.Plugin.library) version Android.Plugin.version apply false
+    id(Compose.Plugin.compose) version Compose.Plugin.version apply false
 }
