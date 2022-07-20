@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_EXPRESSION")
+
 group "io.appoutlet.flux"
 version "1.0-SNAPSHOT"
 
@@ -16,17 +18,8 @@ plugins {
     id(Android.Plugin.application) version Android.Plugin.version  apply false
     id(Android.Plugin.library) version Android.Plugin.version apply false
     id(Compose.Plugin.compose) version Compose.Plugin.version apply false
-    id(Commitlint.plugin) version Commitlint.version
-    id(Githooks.plugin) version Githooks.version
+    id(Commitlint.plugin) version Commitlint.version apply false
+    id(Githooks.plugin) version Githooks.version apply false
 }
 
-githook {
-    failOnMissingHooksDir = true
-    createHooksDirIfNotExist = true
-
-    hooks {
-        create("commit-msg") {
-            task = "commitlint -Dmsgfile=\$1"
-        }
-    }
-}
+apply(from = "${rootDir}/scripts/git-hooks.gradle")
