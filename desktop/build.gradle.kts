@@ -48,3 +48,5 @@ compose.desktop {
         }
     }
 }
+
+apply(from = "$rootDir/scripts/detekt.gradle")

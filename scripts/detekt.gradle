@@ -19,6 +19,10 @@ detekt {
             "src/desktopMain/kotlin",
             "src/desktopTest/kotlin",
 
+            // Desktop module
+            "src/jvmMain/kotlin",
+            "src/jvmTest/kotlin",
+
             // buildSrc
             "${rootDir}/buildSrc/src/main/kotlin"
     )
