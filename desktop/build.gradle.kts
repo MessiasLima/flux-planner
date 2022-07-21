@@ -3,21 +3,22 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("multiplatform")
-    id("org.jetbrains.compose")
+    kotlin(Kotlin.Plugin.multiplatform)
+    id(Compose.Plugin.compose)
 }
 
-group = "io.appoutlet.flux"
-version = "1.0-SNAPSHOT"
-
+group = App.group
+version = App.version
 
 kotlin {
     jvm {
         compilations.all {
             kotlinOptions.jvmTarget = "11"
         }
+
         withJava()
     }
+
     sourceSets {
         val jvmMain by getting {
             dependencies {
@@ -25,17 +26,25 @@ kotlin {
                 implementation(compose.desktop.currentOs)
             }
         }
+
         val jvmTest by getting
     }
 }
 
 compose.desktop {
     application {
-        mainClass = "MainKt"
+
+        mainClass = "io.appoutlet.flux.desktop.MainKt"
+
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            targetFormats(
+                TargetFormat.Dmg,
+                TargetFormat.Msi,
+                TargetFormat.Deb
+            )
+
             packageName = "flux-planner"
-            packageVersion = "1.0.0"
+            packageVersion = App.version
         }
     }
 }

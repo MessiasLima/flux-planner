@@ -1,7 +1,7 @@
 object Android {
     const val applicationId = "io.appoutlet.flux.android"
     const val minSdk = 24
-    const val targetSdk = 33
+    const val targetSdk = 32
     const val compileSdk = targetSdk
     const val versionName = App.version
     const val versionCode = 1
@@ -9,6 +9,6 @@ object Android {
     object Plugin {
         const val application = "com.android.application"
         const val library = "com.android.library"
-        const val version = "4.2.2"
+        const val version = "7.1.3"
     }
 }
