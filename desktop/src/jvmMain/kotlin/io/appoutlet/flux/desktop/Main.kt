@@ -6,6 +6,7 @@ import androidx.compose.ui.window.application
 import io.appoutlet.flux.common.App
 
 fun main() = application {
+    val a = ""
     Window(onCloseRequest = ::exitApplication) {
         App()
     }
