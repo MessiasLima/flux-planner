@@ -5,4 +5,8 @@ object Kotlin {
         const val multiplatform = "multiplatform"
         const val android = "android"
     }
+
+    object Dependency {
+        const val test = "test"
+    }
 }

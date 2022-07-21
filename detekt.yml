@@ -6,4 +6,4 @@ naming:
 style:
   UnusedPrivateMember:
     ignoreAnnotated:
-      - 'Composable'
+      - 'Preview'

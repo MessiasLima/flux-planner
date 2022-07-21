@@ -3,12 +3,23 @@ apply plugin: Detekt.plugin
 detekt {
     autoCorrect = true
     source = files(
+            // Android source folders
             "src/main/java",
             "src/test/java",
             "src/androidTest/java",
             "src/main/kotlin",
             "src/test/kotlin",
             "src/androidTest/kotlin",
+
+            // Common module folders
+            "src/androidMain/kotlin",
+            "src/androidTest/kotlin",
+            "src/commonMain/kotlin",
+            "src/commonTest/kotlin",
+            "src/desktopMain/kotlin",
+            "src/desktopTest/kotlin",
+
+            // buildSrc
             "${rootDir}/buildSrc/src/main/kotlin"
     )
     config = files("${rootDir}/detekt.yml")

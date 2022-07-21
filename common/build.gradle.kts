@@ -1,21 +1,23 @@
 import org.jetbrains.compose.compose
 
 plugins {
-    kotlin("multiplatform")
-    id("org.jetbrains.compose")
-    id("com.android.library")
+    kotlin(Kotlin.Plugin.multiplatform)
+    id(Compose.Plugin.compose)
+    id(Android.Plugin.library)
 }
 
-group = "io.appoutlet.flux"
-version = "1.0-SNAPSHOT"
+group = App.group
+version = App.version
 
 kotlin {
     android()
+
     jvm("desktop") {
         compilations.all {
             kotlinOptions.jvmTarget = "11"
         }
     }
+
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -24,40 +26,50 @@ kotlin {
                 api(compose.material)
             }
         }
+
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test"))
+                implementation(kotlin(Kotlin.Dependency.test))
             }
         }
+
         val androidMain by getting {
             dependencies {
-                api("androidx.appcompat:appcompat:1.2.0")
-                api("androidx.core:core-ktx:1.3.1")
+                api(AndroidX.AppCompat.appCompat)
+                api(AndroidX.Core.coreKtx)
             }
         }
+
         val androidTest by getting {
             dependencies {
-                implementation("junit:junit:4.13")
+                implementation(Junit.junit)
             }
         }
+
         val desktopMain by getting {
             dependencies {
                 api(compose.preview)
             }
         }
+
         val desktopTest by getting
     }
 }
 
 android {
-    compileSdkVersion(31)
+    compileSdkVersion(Android.compileSdk)
+
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+
     defaultConfig {
-        minSdkVersion(24)
-        targetSdkVersion(31)
+        minSdkVersion(Android.minSdk)
+        targetSdkVersion(Android.targetSdk)
     }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 }
+
+apply(from = "$rootDir/scripts/detekt.gradle")
