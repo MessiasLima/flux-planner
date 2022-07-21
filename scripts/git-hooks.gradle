@@ -1,0 +1,17 @@
+apply plugin: Githooks.plugin
+apply plugin: Commitlint.plugin
+
+githook {
+    failOnMissingHooksDir = true
+    createHooksDirIfNotExist = true
+
+    hooks {
+        create("commit-msg") {
+            task = "commitlint -Dmsgfile=\$1"
+        }
+
+        create("pre-push") {
+            task = "detekt"
+        }
+    }
+}

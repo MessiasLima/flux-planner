@@ -1,37 +1,38 @@
 plugins {
-    id("org.jetbrains.compose")
-    id("com.android.application")
-    kotlin("android")
+    id(Compose.Plugin.compose)
+    id(Android.Plugin.application)
+    kotlin(Kotlin.Plugin.android)
 }
 
-group "io.appoutlet.flux"
-version "1.0-SNAPSHOT"
-
-repositories {
-    jcenter()
-}
+group = App.group
+version = App.version
 
 dependencies {
     implementation(project(":common"))
-    implementation("androidx.activity:activity-compose:1.3.0")
+    implementation(AndroidX.Activity.activityCompose)
 }
 
 android {
-    compileSdkVersion(31)
+    compileSdkVersion(Android.compileSdk)
+
     defaultConfig {
-        applicationId = "io.appoutlet.flux.android"
-        minSdkVersion(24)
-        targetSdkVersion(31)
-        versionCode = 1
-        versionName = "1.0-SNAPSHOT"
+        applicationId = Android.applicationId
+        minSdkVersion(Android.minSdk)
+        targetSdkVersion(Android.targetSdk)
+        versionCode = Android.versionCode
+        versionName = Android.versionName
     }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
         }
     }
 }
+
+apply(from = "$rootDir/scripts/detekt.gradle")
