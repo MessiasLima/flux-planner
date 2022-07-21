@@ -9,5 +9,9 @@ githook {
         create("commit-msg") {
             task = "commitlint -Dmsgfile=\$1"
         }
+
+        create("pre-push") {
+            task = "detekt"
+        }
     }
 }
