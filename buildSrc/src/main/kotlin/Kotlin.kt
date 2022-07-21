@@ -1,6 +1,8 @@
 object Kotlin {
     const val version = "1.6.10"
 
-    const val multiplatformPlugin = "multiplatform"
-    const val androidPlugin = "android"
+    object Plugin {
+        const val multiplatform = "multiplatform"
+        const val android = "android"
+    }
 }
