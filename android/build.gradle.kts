@@ -34,3 +34,5 @@ android {
         }
     }
 }
+
+apply(from = "$rootDir/scripts/detekt.gradle")
