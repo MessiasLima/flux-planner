@@ -25,3 +25,16 @@ tasks.koverMergedXmlReport {
     includes = includePatters
     excludes = excludePatters
 }
+
+tasks.koverMergedVerify {
+    includes = includePatters
+    excludes = excludePatters
+
+    rule {
+        name = "Minimal line coverage rate in percent"
+        bound {
+            minValue = 1
+            valueType = 'COVERED_LINES_PERCENTAGE'
+        }
+    }
+}
