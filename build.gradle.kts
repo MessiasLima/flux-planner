@@ -21,6 +21,8 @@ plugins {
     id(Commitlint.plugin) version Commitlint.version apply false
     id(Githooks.plugin) version Githooks.version apply false
     id(Detekt.plugin) version Detekt.version
+    id(Kover.plugin) version Kover.version
 }
 
 apply(from = "${rootDir}/scripts/git-hooks.gradle")
+apply(from = "${rootDir}/scripts/kover.gradle")

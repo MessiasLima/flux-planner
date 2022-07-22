@@ -40,11 +40,7 @@ kotlin {
             }
         }
 
-        val androidTest by getting {
-            dependencies {
-                implementation(Junit.junit)
-            }
-        }
+        val androidTest by getting
 
         val desktopMain by getting {
             dependencies {
