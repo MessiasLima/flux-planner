@@ -1,0 +1,27 @@
+apply plugin: Kover.plugin
+
+def includePatters = ['io.appoutlet.flux.*']
+def excludePatters = ['io.appoutlet.flux.*.*Test']
+
+tasks.withType(Test).configureEach {
+    kover {
+        disabled = false
+        binaryReportFile.set(file("$buildDir/custom/result.bin"))
+        includes = includePatters
+        excludes = excludePatters
+    }
+}
+
+tasks.koverMergedHtmlReport {
+    enabled = true                          // false to disable report generation
+    htmlReportDir.set(layout.buildDirectory.dir("kover-report/html"))
+    includes = includePatters
+    excludes = excludePatters
+}
+
+tasks.koverMergedXmlReport {
+    enabled = true                          // false to disable report generation
+    xmlReportFile.set(layout.buildDirectory.file("kover-report/xml/result.xml"))
+    includes = includePatters
+    excludes = excludePatters
+}

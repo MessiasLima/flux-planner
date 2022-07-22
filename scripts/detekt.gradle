@@ -31,6 +31,12 @@ detekt {
     buildUponDefaultConfig = true
 }
 
+tasks.withType(Detekt).configureEach {
+    reports {
+        txt.required.set(true)
+    }
+}
+
 dependencies {
     // Plugins
     detektPlugins(Detekt.formatting)
