@@ -1,4 +1,4 @@
-package io.appoutlet.flux.common
+package io.appoutlet.flux.common.core.ui
 
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors

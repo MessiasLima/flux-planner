@@ -1,4 +1,4 @@
-package io.appoutlet.flux.common
+package io.appoutlet.flux.common.core.ui
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
