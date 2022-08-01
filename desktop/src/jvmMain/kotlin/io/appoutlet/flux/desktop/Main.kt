@@ -1,26 +1,28 @@
 package io.appoutlet.flux.desktop
 
-import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import io.appoutlet.flux.common.feature.login.LoginView
-import io.appoutlet.flux.common.feature.login.LoginViewModel
+import io.appoutlet.flux.common.core.ui.FluxTheme
+import io.appoutlet.flux.desktop.feature.splash.SplashPage
 import io.appoutlet.karavel.Karavel
-import io.appoutlet.karavel.Page
+import java.awt.Dimension
 
-fun main() = application {
-    val karavel = Karavel(LoginPage())
-    Window(
-        onCloseRequest = ::exitApplication,
-        title = "Flux planner",
-    ) {
-       karavel.currentPage().content()
-    }
-}
+fun main() {
+    application {
 
-class LoginPage : Page() {
-    @Composable
-    override fun content() {
-        LoginView(LoginViewModel())
+        val karavel = Karavel(SplashPage())
+
+        Window(
+            onCloseRequest = ::exitApplication,
+            title = "Flux planner",
+            icon = painterResource("image/icon/icon.png"),
+        ) {
+            window.minimumSize = Dimension(800, 600)
+
+            FluxTheme {
+                karavel.currentPage().content()
+            }
+        }
     }
 }

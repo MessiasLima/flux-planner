@@ -42,7 +42,8 @@ compose.desktop {
             targetFormats(
                 TargetFormat.Dmg,
                 TargetFormat.Msi,
-                TargetFormat.Deb
+                TargetFormat.Deb,
+                TargetFormat.AppImage,
             )
 
             packageName = "flux-planner"
