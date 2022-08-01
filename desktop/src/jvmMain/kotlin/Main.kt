@@ -1,4 +1,4 @@
-package io.appoutlet.flux.desktop
+@file:JvmName("Flux")
 
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.window.Window

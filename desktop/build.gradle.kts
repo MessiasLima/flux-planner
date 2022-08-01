@@ -36,7 +36,7 @@ kotlin {
 compose.desktop {
     application {
 
-        mainClass = "io.appoutlet.flux.desktop.MainKt"
+        mainClass = "Flux"
 
         nativeDistributions {
             targetFormats(
