@@ -1,6 +1,7 @@
+@file:Suppress("UNUSED_VARIABLE")
+
 import org.jetbrains.compose.compose
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin(Kotlin.Plugin.multiplatform)
@@ -24,6 +25,7 @@ kotlin {
             dependencies {
                 implementation(project(":common"))
                 implementation(compose.desktop.currentOs)
+                implementation(Karavel.karavel)
             }
         }
 
