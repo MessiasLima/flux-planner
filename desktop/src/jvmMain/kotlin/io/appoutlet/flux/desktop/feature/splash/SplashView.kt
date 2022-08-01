@@ -14,20 +14,29 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
 
 @Preview
 @Composable
-fun SplashView() {
+fun SplashView(onSuccess: () -> Unit) {
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
+            LaunchedEffect(Unit) {
+                // TODO: Verify if user is logged
+                delay(1000)
+                onSuccess()
+            }
+
             Image(
                 painter = painterResource("image/icon/icon.png"),
                 contentDescription = "Application icon",
