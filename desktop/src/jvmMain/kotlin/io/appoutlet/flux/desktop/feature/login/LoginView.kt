@@ -35,7 +35,8 @@ fun LoginView() {
             Card(
                 modifier = Modifier.width(432.dp),
                 shape = shapeMedium,
-                elevation = 6.dp
+                elevation = 6.dp,
+                backgroundColor = MaterialTheme.colorScheme.surface
             ) {
                 var loginPage by remember { mutableStateOf(LoginViewPage.SIGN_IN) }
 
