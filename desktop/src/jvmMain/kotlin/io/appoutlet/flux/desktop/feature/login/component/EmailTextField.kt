@@ -11,6 +11,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
+import io.appoutlet.flux.desktop.common.Cancel
+import io.appoutlet.flux.desktop.common.Flux
 
 @Composable
 fun EmailTextField(
@@ -31,7 +33,7 @@ fun EmailTextField(
             if (value.isNotBlank()) {
                 Icon(
                     modifier = Modifier.clickable(onClick = onClearIconClick, role = Role.Button),
-                    imageVector = Icons.Outlined.Cancel,
+                    painter = Icons.Flux.Cancel,
                     contentDescription = "Clear",
                 )
             }

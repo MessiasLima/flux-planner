@@ -1,13 +1,9 @@
 package io.appoutlet.flux.desktop.feature.login.component
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.mouseClickable
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Visibility
-import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -18,6 +14,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import io.appoutlet.flux.desktop.common.Flux
+import io.appoutlet.flux.desktop.common.Visibility
+import io.appoutlet.flux.desktop.common.VisibilityOff
 
 @Composable
 fun PasswordTextField(
@@ -26,7 +25,7 @@ fun PasswordTextField(
     onValueChange: (String) -> Unit,
 ) {
     var showPassword by remember { mutableStateOf(false) }
-    val icon = if (showPassword) Icons.Outlined.VisibilityOff else Icons.Outlined.Visibility
+    val icon = if (showPassword) Icons.Flux.VisibilityOff else Icons.Flux.Visibility
     val contentDescription = if (showPassword) "Hide password" else "Show password"
     val visualTransformation = if (showPassword) {
         VisualTransformation.None
@@ -45,7 +44,7 @@ fun PasswordTextField(
         trailingIcon = {
             Icon(
                 modifier = Modifier.clickable { showPassword = !showPassword },
-                imageVector = icon,
+                painter = icon,
                 contentDescription = contentDescription,
             )
         },
