@@ -1,3 +1,5 @@
+@file:Suppress("MagicNumber")
+
 package io.appoutlet.flux.common.core.ui
 
 import androidx.compose.material3.darkColorScheme
