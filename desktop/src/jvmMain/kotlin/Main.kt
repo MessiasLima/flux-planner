@@ -20,7 +20,7 @@ fun main() {
             title = "Flux planner",
             icon = painterResource("image/icon/icon.png"),
         ) {
-            window.minimumSize = Dimension(800, 600)
+            window.minimumSize = Dimension(800, 700)
 
             FluxTheme {
                 karavel.currentPage().content()
