@@ -9,6 +9,9 @@ import io.appoutlet.flux.desktop.feature.splash.SplashPage
 import io.appoutlet.karavel.Karavel
 import java.awt.Dimension
 
+private const val WINDOW_MIN_WIDTH = 800
+private const val WINDOW_MIN_HEIGHT = 700
+
 @ExperimentalFoundationApi
 fun main() {
     application {
@@ -20,7 +23,7 @@ fun main() {
             title = "Flux planner",
             icon = painterResource("image/icon/icon.png"),
         ) {
-            window.minimumSize = Dimension(800, 700)
+            window.minimumSize = Dimension(WINDOW_MIN_WIDTH, WINDOW_MIN_HEIGHT)
 
             FluxTheme {
                 karavel.currentPage().content()

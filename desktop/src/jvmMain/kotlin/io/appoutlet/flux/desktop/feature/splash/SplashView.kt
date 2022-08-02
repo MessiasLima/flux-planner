@@ -30,7 +30,6 @@ fun SplashView(onSuccess: () -> Unit) {
             verticalArrangement = Arrangement.Center,
         ) {
             LaunchedEffect(Unit) {
-                // TODO: Verify if user is logged
                 delay(1000)
                 onSuccess()
             }

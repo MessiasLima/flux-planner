@@ -7,8 +7,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.loadSvgPainter
 import androidx.compose.ui.res.useResource
 
-
-object FluxIcons{
+object FluxIcons {
     private const val BASE_ICON_FOLDER = "image/icon/"
     @Composable
     fun loadSvgResource(path: String): Painter {
