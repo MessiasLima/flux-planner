@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.appoutlet.flux.common.core.ui.shapeMedium
+import io.appoutlet.flux.desktop.feature.signin.SignInView
 
 @ExperimentalFoundationApi
 @Composable
@@ -43,7 +44,7 @@ fun LoginView() {
                 val onNavigate = { newPage: LoginViewPage -> loginPage = newPage }
 
                 when (loginPage) {
-                    LoginViewPage.SIGN_IN -> SignInView(onNavigate)
+                    LoginViewPage.SIGN_IN -> SignInView(onNavigate = onNavigate)
                     LoginViewPage.SIGN_UP -> SignUpView(onNavigate)
                     LoginViewPage.FORGOT_PASSWORD -> ForgotPasswordView(onNavigate)
                 }

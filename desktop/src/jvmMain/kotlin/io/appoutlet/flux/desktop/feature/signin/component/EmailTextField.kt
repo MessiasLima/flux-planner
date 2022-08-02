@@ -1,4 +1,4 @@
-package io.appoutlet.flux.desktop.feature.login.component
+package io.appoutlet.flux.desktop.feature.signin.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -19,7 +19,8 @@ fun EmailTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
-    onClearIconClick: () -> Unit
+    onClearIconClick: () -> Unit,
+    enabled: Boolean,
 ) {
     TextField(
         modifier = modifier,
@@ -44,5 +45,6 @@ fun EmailTextField(
             }
         },
         singleLine = true,
+        enabled = enabled,
     )
 }

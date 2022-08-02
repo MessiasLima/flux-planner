@@ -5,6 +5,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import io.appoutlet.flux.common.core.ui.FluxTheme
+import io.appoutlet.flux.desktop.di.initKoin
 import io.appoutlet.flux.desktop.feature.splash.SplashPage
 import io.appoutlet.karavel.Karavel
 import java.awt.Dimension
@@ -14,8 +15,8 @@ private const val WINDOW_MIN_HEIGHT = 700
 
 @ExperimentalFoundationApi
 fun main() {
+    initKoin()
     application {
-
         val karavel = Karavel(SplashPage())
 
         Window(

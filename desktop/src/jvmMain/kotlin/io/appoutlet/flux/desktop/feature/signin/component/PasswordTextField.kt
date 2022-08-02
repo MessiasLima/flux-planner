@@ -1,4 +1,4 @@
-package io.appoutlet.flux.desktop.feature.login.component
+package io.appoutlet.flux.desktop.feature.signin.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -25,6 +25,7 @@ fun PasswordTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
+    enabled: Boolean,
 ) {
     var showPassword by remember { mutableStateOf(false) }
     val icon = if (showPassword) Icons.Flux.VisibilityOff else Icons.Flux.Visibility
@@ -56,6 +57,7 @@ fun PasswordTextField(
             )
         },
         visualTransformation = visualTransformation,
-        singleLine = true
+        singleLine = true,
+        enabled = enabled
     )
 }
