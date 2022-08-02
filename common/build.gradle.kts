@@ -1,4 +1,4 @@
-@file:Suppress("UNUSED_VARIABLE")
+@file:Suppress("UNUSED_VARIABLE", "OPT_IN_IS_NOT_ENABLED")
 
 import org.jetbrains.compose.compose
 
@@ -26,7 +26,6 @@ kotlin {
             dependencies {
                 api(compose.runtime)
                 api(compose.foundation)
-                api(compose.material)
                 api(compose.material3)
                 api(compose.materialIconsExtended)
                 api(Koin.core)

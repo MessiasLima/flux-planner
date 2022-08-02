@@ -1,5 +1,6 @@
 @file:JvmName("Flux")
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
@@ -8,6 +9,7 @@ import io.appoutlet.flux.desktop.feature.splash.SplashPage
 import io.appoutlet.karavel.Karavel
 import java.awt.Dimension
 
+@ExperimentalFoundationApi
 fun main() {
     application {
 
