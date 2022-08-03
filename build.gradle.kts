@@ -15,6 +15,7 @@ allprojects {
 plugins {
     kotlin(Kotlin.Plugin.multiplatform) version Kotlin.version apply false
     kotlin(Kotlin.Plugin.android) version Kotlin.version apply false
+    kotlin(Kotlin.Plugin.serialization) version Kotlin.version apply false
     id(Android.Plugin.application) version Android.Plugin.version  apply false
     id(Android.Plugin.library) version Android.Plugin.version apply false
     id(Compose.Plugin.compose) version Compose.Plugin.version apply false

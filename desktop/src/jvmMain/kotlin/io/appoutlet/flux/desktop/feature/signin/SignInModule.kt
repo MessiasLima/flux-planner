@@ -4,5 +4,5 @@ import io.appoutlet.flux.common.feature.signin.SignInViewModel
 import org.koin.dsl.module
 
 val signInModule = module {
-    factory { SignInViewModel() }
+    factory { SignInViewModel(get()) }
 }

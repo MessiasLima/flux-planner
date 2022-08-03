@@ -25,6 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import io.appoutlet.flux.common.feature.signin.SignInUiState
 import io.appoutlet.flux.common.feature.signin.SignInViewModel
+import io.appoutlet.flux.desktop.common.initialize
 import io.appoutlet.flux.desktop.di.koin
 import io.appoutlet.flux.desktop.feature.login.LoginViewPage
 import io.appoutlet.flux.desktop.feature.signin.component.EmailTextField
@@ -32,6 +33,8 @@ import io.appoutlet.flux.desktop.feature.signin.component.PasswordTextField
 
 @Composable
 fun SignInView(viewModel: SignInViewModel = koin.get(), onNavigate: (LoginViewPage) -> Unit) {
+    viewModel.initialize()
+
     Box {
         val uiState by viewModel.uiState.collectAsState()
         val isLoading = uiState is SignInUiState.Loading
