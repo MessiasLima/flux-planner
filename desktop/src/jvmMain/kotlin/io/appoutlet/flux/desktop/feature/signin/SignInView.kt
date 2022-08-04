@@ -36,8 +36,7 @@ fun SignInView(viewModel: SignInViewModel = koin.get(), onNavigate: (LoginViewPa
     viewModel.initialize()
 
     Box {
-        val uiState by viewModel.uiState.collectAsState()
-        val isLoading = uiState is SignInUiState.Loading
+        var isLoading by remember { mutableStateOf(false) }
 
         if (isLoading) {
             LinearProgressIndicator(
@@ -45,77 +44,90 @@ fun SignInView(viewModel: SignInViewModel = koin.get(), onNavigate: (LoginViewPa
             )
         }
 
-        Column(
-            modifier = Modifier.padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+        SignInForm(
+            viewModel = viewModel,
+            onLoadingStateChanged = { isLoading = it },
+            onNavigate = onNavigate,
+        )
+    }
+}
+
+@Composable
+fun SignInForm(
+    viewModel: SignInViewModel,
+    onLoadingStateChanged: (isLoading: Boolean) -> Unit,
+    onNavigate: (LoginViewPage) -> Unit
+) {
+    val uiState by viewModel.uiState.collectAsState()
+    val isLoading = uiState is SignInUiState.Loading
+
+    onLoadingStateChanged(isLoading)
+
+    Column(
+        modifier = Modifier.padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        var email by remember { mutableStateOf("") }
+        var password by remember { mutableStateOf("") }
+
+        Image(
+            modifier = Modifier.width(124.dp),
+            painter = painterResource("image/icon/icon.png"),
+            contentDescription = "Application icon"
+        )
+
+        Spacer(modifier = Modifier.height(40.dp))
+
+        Text(
+            text = "Welcome to Flux!",
+            style = MaterialTheme.typography.headlineLarge,
+            color = MaterialTheme.colorScheme.primary
+        )
+
+        Spacer(modifier = Modifier.height(47.dp))
+
+        EmailTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = email,
+            onValueChange = { email = it },
+            onClearIconClick = { email = "" },
+            enabled = !isLoading
+        )
+
+        Spacer(modifier = Modifier.height(36.dp))
+
+        PasswordTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = password,
+            onValueChange = { password = it },
+            enabled = !isLoading
+        )
+
+        Spacer(modifier = Modifier.height(47.dp))
+
+        Button(
+            modifier = Modifier.width(159.dp),
+            onClick = { viewModel.login(email, password) },
+            enabled = !isLoading,
         ) {
+            Text(text = "SIGN IN", style = MaterialTheme.typography.titleSmall)
+        }
 
-            var email by remember { mutableStateOf("") }
-            var password by remember { mutableStateOf("") }
+        Spacer(modifier = Modifier.height(10.dp))
 
-            Image(
-                modifier = Modifier.width(124.dp),
-                painter = painterResource("image/icon/icon.png"),
-                contentDescription = "Application icon"
-            )
+        TextButton(
+            enabled = !isLoading,
+            onClick = { onNavigate(LoginViewPage.SIGN_UP) },
+        ) {
+            Text("Create account")
+        }
 
-            Spacer(modifier = Modifier.height(40.dp))
-
-            Text(
-                text = "Welcome to Flux!",
-                style = MaterialTheme.typography.headlineLarge,
-                color = MaterialTheme.colorScheme.primary
-            )
-
-            Spacer(modifier = Modifier.height(47.dp))
-
-            EmailTextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = email,
-                onValueChange = { email = it },
-                onClearIconClick = { email = "" },
-                enabled = !isLoading
-            )
-
-            Spacer(modifier = Modifier.height(36.dp))
-
-            PasswordTextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = password,
-                onValueChange = { password = it },
-                enabled = !isLoading
-            )
-
-            Spacer(modifier = Modifier.height(47.dp))
-
-            Button(
-                modifier = Modifier.width(159.dp),
-                onClick = { viewModel.login(email, password) },
-                enabled = !isLoading,
-            ) {
-                Text(text = "SIGN IN", style = MaterialTheme.typography.titleSmall)
-            }
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            TextButton(
-                enabled = !isLoading,
-                onClick = {
-                    onNavigate(LoginViewPage.SIGN_UP)
-                },
-            ) {
-                Text("Create account")
-            }
-
-            TextButton(
-                enabled = !isLoading,
-                onClick = {
-                    onNavigate(LoginViewPage.FORGOT_PASSWORD)
-                },
-            ) {
-                Text("Forgot password")
-            }
+        TextButton(
+            enabled = !isLoading,
+            onClick = { onNavigate(LoginViewPage.FORGOT_PASSWORD) },
+        ) {
+            Text("Forgot password")
         }
     }
-
 }
