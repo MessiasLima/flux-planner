@@ -18,10 +18,7 @@ class SignInViewModel(
         signInOrchestrator.signIn(email, password)
             .onStart { mutableUiState.value = SignInUiState.Loading }
             .onEach { mutableUiState.value = SignInUiState.Success }
-            .catch {
-                it.printStackTrace()
-                mutableUiState.value = SignInUiState.Error(it)
-            }
+            .catch { mutableUiState.value = SignInUiState.Error(it) }
             .launchIn(viewModelScope)
     }
 }

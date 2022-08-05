@@ -1,5 +1,7 @@
 package io.appoutlet.flux.desktop.feature.signin
 
+import androidx.compose.animation.core.animateIntAsState
+import androidx.compose.animation.core.animateValueAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -58,8 +60,12 @@ fun SignInForm(
     onLoadingStateChanged: (isLoading: Boolean) -> Unit,
     onNavigate: (LoginViewPage) -> Unit
 ) {
+    var isLoading by remember { mutableStateOf(false) }
+    var isError by remember { mutableStateOf(false) }
     val uiState by viewModel.uiState.collectAsState()
-    val isLoading = uiState is SignInUiState.Loading
+
+    isLoading = uiState is SignInUiState.Loading
+    isError = uiState is SignInUiState.Error
 
     onLoadingStateChanged(isLoading)
 
@@ -112,6 +118,10 @@ fun SignInForm(
             enabled = !isLoading,
         ) {
             Text(text = "SIGN IN", style = MaterialTheme.typography.titleSmall)
+        }
+
+        if (isError) {
+            Text("Error")
         }
 
         Spacer(modifier = Modifier.height(10.dp))

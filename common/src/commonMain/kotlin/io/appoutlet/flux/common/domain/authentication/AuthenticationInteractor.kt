@@ -15,7 +15,8 @@ class AuthenticationInteractor(
 ) {
     fun signIn(email: String, password: String): Flow<UserDomain> {
         val authenticationRequest = authenticationRequestMapper.map(email, password)
-        return flow<AuthenticationResponse> { authenticationApi.authenticate(authenticationRequest) }
-            .map { userDomainMapper.map(it) }
+        return flow<AuthenticationResponse> {
+            authenticationApi.authenticate(authenticationRequest)
+        }.map { userDomainMapper.map(it) }
     }
 }
