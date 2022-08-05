@@ -2,16 +2,11 @@ package io.appoutlet.flux.common.core.network.authentication
 
 import io.appoutlet.flux.common.core.network.getResult
 import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.plugins.ClientRequestException
-import io.ktor.client.plugins.ResponseException
-import io.ktor.client.plugins.expectSuccess
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
-import io.ktor.http.isSuccess
 
 private const val SIGN_IN_END_POINT =
     "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword"

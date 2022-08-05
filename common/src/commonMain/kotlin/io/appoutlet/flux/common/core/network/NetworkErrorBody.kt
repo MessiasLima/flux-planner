@@ -13,7 +13,7 @@ suspend inline fun <reified T> HttpResponse.getResult(): T {
     }
 }
 
-class FluxNetworkException(val errorBody: FluxNetworkErrorBody): Throwable()
+class FluxNetworkException(val errorBody: FluxNetworkErrorBody) : Throwable()
 
 @Serializable
 data class FluxNetworkErrorBody(

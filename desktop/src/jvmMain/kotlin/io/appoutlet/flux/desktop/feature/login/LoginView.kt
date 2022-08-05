@@ -11,15 +11,12 @@ import androidx.compose.material.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.appoutlet.flux.common.core.ui.shapeMedium
-import io.appoutlet.flux.desktop.feature.signin.SignInView
+import io.appoutlet.flux.desktop.feature.signin.SignInPage
+import io.appoutlet.karavel.Karavel
 
 @ExperimentalFoundationApi
 @Composable
@@ -33,21 +30,14 @@ fun LoginView() {
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
+            val loginKaravel = Karavel(SignInPage())
             Card(
                 modifier = Modifier.width(432.dp),
                 shape = shapeMedium,
                 elevation = 6.dp,
                 backgroundColor = MaterialTheme.colorScheme.surface
             ) {
-                var loginPage by remember { mutableStateOf(LoginViewPage.SIGN_IN) }
-
-                val onNavigate = { newPage: LoginViewPage -> loginPage = newPage }
-
-                when (loginPage) {
-                    LoginViewPage.SIGN_IN -> SignInView(onNavigate = onNavigate)
-                    LoginViewPage.SIGN_UP -> SignUpView(onNavigate)
-                    LoginViewPage.FORGOT_PASSWORD -> ForgotPasswordView(onNavigate)
-                }
+                loginKaravel.currentPage().content()
             }
         }
     }

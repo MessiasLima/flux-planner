@@ -1,7 +1,5 @@
 package io.appoutlet.flux.desktop.feature.signin
 
-import androidx.compose.animation.core.animateIntAsState
-import androidx.compose.animation.core.animateValueAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,115 +27,90 @@ import io.appoutlet.flux.common.feature.signin.SignInUiState
 import io.appoutlet.flux.common.feature.signin.SignInViewModel
 import io.appoutlet.flux.desktop.common.initialize
 import io.appoutlet.flux.desktop.di.koin
-import io.appoutlet.flux.desktop.feature.login.LoginViewPage
+import io.appoutlet.flux.desktop.feature.crateaccount.SignUpPage
+import io.appoutlet.flux.desktop.feature.passwordrecovery.PasswordRecoveryPage
 import io.appoutlet.flux.desktop.feature.signin.component.EmailTextField
 import io.appoutlet.flux.desktop.feature.signin.component.PasswordTextField
+import io.appoutlet.karavel.Karavel
 
 @Composable
-fun SignInView(viewModel: SignInViewModel = koin.get(), onNavigate: (LoginViewPage) -> Unit) {
+fun SignInView(karavel: Karavel?, viewModel: SignInViewModel = koin.get()) {
     viewModel.initialize()
-
-    Box {
-        var isLoading by remember { mutableStateOf(false) }
-
-        if (isLoading) {
-            LinearProgressIndicator(
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-
-        SignInForm(
-            viewModel = viewModel,
-            onLoadingStateChanged = { isLoading = it },
-            onNavigate = onNavigate,
-        )
-    }
+    SignInForm(viewModel, karavel)
 }
 
 @Composable
-fun SignInForm(
-    viewModel: SignInViewModel,
-    onLoadingStateChanged: (isLoading: Boolean) -> Unit,
-    onNavigate: (LoginViewPage) -> Unit
-) {
-    var isLoading by remember { mutableStateOf(false) }
-    var isError by remember { mutableStateOf(false) }
-    val uiState by viewModel.uiState.collectAsState()
+fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?) {
+    Box {
+        val uiState: SignInUiState by viewModel.uiState.collectAsState(initial = SignInUiState.Idle)
+        val isLoading = uiState is SignInUiState.Loading
 
-    isLoading = uiState is SignInUiState.Loading
-    isError = uiState is SignInUiState.Error
+        if (isLoading) LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
 
-    onLoadingStateChanged(isLoading)
-
-    Column(
-        modifier = Modifier.padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-
-        var email by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
-
-        Image(
-            modifier = Modifier.width(124.dp),
-            painter = painterResource("image/icon/icon.png"),
-            contentDescription = "Application icon"
-        )
-
-        Spacer(modifier = Modifier.height(40.dp))
-
-        Text(
-            text = "Welcome to Flux!",
-            style = MaterialTheme.typography.headlineLarge,
-            color = MaterialTheme.colorScheme.primary
-        )
-
-        Spacer(modifier = Modifier.height(47.dp))
-
-        EmailTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = email,
-            onValueChange = { email = it },
-            onClearIconClick = { email = "" },
-            enabled = !isLoading
-        )
-
-        Spacer(modifier = Modifier.height(36.dp))
-
-        PasswordTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = password,
-            onValueChange = { password = it },
-            enabled = !isLoading
-        )
-
-        Spacer(modifier = Modifier.height(47.dp))
-
-        Button(
-            modifier = Modifier.width(159.dp),
-            onClick = { viewModel.login(email, password) },
-            enabled = !isLoading,
+        Column(
+            modifier = Modifier.padding(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "SIGN IN", style = MaterialTheme.typography.titleSmall)
-        }
 
-        if (isError) {
-            Text("Error")
-        }
+            var email by remember { mutableStateOf("") }
+            var password by remember { mutableStateOf("") }
 
-        Spacer(modifier = Modifier.height(10.dp))
+            Image(
+                modifier = Modifier.width(124.dp),
+                painter = painterResource("image/icon/icon.png"),
+                contentDescription = "Application icon"
+            )
 
-        TextButton(
-            enabled = !isLoading,
-            onClick = { onNavigate(LoginViewPage.SIGN_UP) },
-        ) {
-            Text("Create account")
-        }
+            Spacer(modifier = Modifier.height(40.dp))
 
-        TextButton(
-            enabled = !isLoading,
-            onClick = { onNavigate(LoginViewPage.FORGOT_PASSWORD) },
-        ) {
-            Text("Forgot password")
+            Text(
+                text = "Welcome to Flux!",
+                style = MaterialTheme.typography.headlineLarge,
+                color = MaterialTheme.colorScheme.primary
+            )
+
+            Spacer(modifier = Modifier.height(47.dp))
+
+            EmailTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = email,
+                onValueChange = { email = it },
+                onClearIconClick = { email = "" },
+                enabled = !isLoading
+            )
+
+            Spacer(modifier = Modifier.height(36.dp))
+
+            PasswordTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = password,
+                onValueChange = { password = it },
+                enabled = !isLoading
+            )
+
+            Spacer(modifier = Modifier.height(47.dp))
+
+            Button(
+                modifier = Modifier.width(159.dp),
+                onClick = { viewModel.login(email, password) },
+                enabled = !isLoading,
+            ) { Text(text = "SIGN IN", style = MaterialTheme.typography.titleSmall) }
+
+            if (uiState is SignInUiState.Error) {
+                Text("Error")
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            TextButton(
+                enabled = !isLoading,
+                onClick = { karavel?.navigate(SignUpPage()) },
+            ) { Text("Create account") }
+
+            TextButton(
+                enabled = !isLoading,
+                onClick = { karavel?.navigate(PasswordRecoveryPage()) },
+            ) { Text("Forgot password") }
         }
     }
 }
