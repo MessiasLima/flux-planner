@@ -7,6 +7,7 @@ plugins {
     kotlin(Kotlin.Plugin.serialization)
     id(Compose.Plugin.compose)
     id(Android.Plugin.library)
+    id(SqlDelight.plugin)
 }
 
 group = App.group
@@ -49,6 +50,7 @@ kotlin {
                 api(AndroidX.Core.coreKtx)
                 implementation(Ktor.clientAndroid)
                 implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
+                implementation("com.squareup.sqldelight:android-driver:${SqlDelight.version}")
             }
         }
 
@@ -58,6 +60,7 @@ kotlin {
             dependencies {
                 api(compose.preview)
                 implementation(Ktor.clientJava)
+                implementation("com.squareup.sqldelight:sqlite-driver:${SqlDelight.version}")
             }
         }
 
@@ -78,6 +81,13 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+}
+
+sqldelight {
+    database("FluxDB") {
+        packageName = "io.appoutlet.flux.common.core.database"
+        schemaOutputDirectory = file("src/commonMain/sqldelight/io/appoutlet/flux/common/core/database")
     }
 }
 

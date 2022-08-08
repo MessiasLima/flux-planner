@@ -4,5 +4,6 @@ import org.koin.dsl.module
 
 val userDomainModule = module {
     factory { UserDomainMapper() }
-    factory { UserInteractor() }
+    factory { UserEntityMapper() }
+    factory { UserInteractor(get(), get(), get()) }
 }

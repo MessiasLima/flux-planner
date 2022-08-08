@@ -1,6 +1,7 @@
 package io.appoutlet.flux.common.core.network.authentication
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 @Serializable
 data class AuthenticationResponse(
@@ -10,6 +11,6 @@ data class AuthenticationResponse(
     val displayName: String,
     val idToken: String,
     val registered: Boolean,
-    val refreshToken: String,
-    val expiresIn: String,
+    @Transient val refreshToken: String? = null,
+    @Transient val expiresIn: String? = null,
 )

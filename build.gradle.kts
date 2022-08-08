@@ -21,6 +21,7 @@ plugins {
     id(Compose.Plugin.compose) version Compose.Plugin.version apply false
     id(Commitlint.plugin) version Commitlint.version apply false
     id(Githooks.plugin) version Githooks.version apply false
+    id(SqlDelight.plugin) version SqlDelight.version apply false
     id(Detekt.plugin) version Detekt.version
     id(Kover.plugin) version Kover.version
 }
