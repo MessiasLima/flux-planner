@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import io.appoutlet.flux.common.core.ui.Spacing
 import io.appoutlet.flux.common.feature.signin.SignInUiState
 import io.appoutlet.flux.common.feature.signin.SignInViewModel
 import io.appoutlet.flux.desktop.common.FluxImages
@@ -57,7 +58,7 @@ fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuccessful:
         }
 
         Column(
-            modifier = Modifier.padding(24.dp),
+            modifier = Modifier.padding(Spacing.Medium),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
@@ -65,12 +66,11 @@ fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuccessful:
             var password by remember { mutableStateOf("") }
 
             Image(
-                modifier = Modifier.width(124.dp),
                 painter = FluxImages.Logo,
                 contentDescription = "Application icon"
             )
 
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(Spacing.Medium))
 
             Text(
                 text = "Welcome to Flux!",
@@ -78,7 +78,7 @@ fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuccessful:
                 color = MaterialTheme.colorScheme.primary
             )
 
-            Spacer(modifier = Modifier.height(47.dp))
+            Spacer(modifier = Modifier.height(Spacing.Large))
 
             EmailTextField(
                 modifier = Modifier.fillMaxWidth(),
@@ -88,7 +88,7 @@ fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuccessful:
                 enabled = !isLoading
             )
 
-            Spacer(modifier = Modifier.height(36.dp))
+            Spacer(modifier = Modifier.height(Spacing.Medium))
 
             PasswordTextField(
                 modifier = Modifier.fillMaxWidth(),
@@ -97,7 +97,7 @@ fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuccessful:
                 enabled = !isLoading
             )
 
-            Spacer(modifier = Modifier.height(47.dp))
+            Spacer(modifier = Modifier.height(Spacing.Large))
 
             Button(
                 modifier = Modifier.width(159.dp),
@@ -109,7 +109,7 @@ fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuccessful:
                 Text("Error")
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(Spacing.Small))
 
             TextButton(
                 enabled = !isLoading,
