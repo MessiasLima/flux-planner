@@ -53,8 +53,8 @@ kotlin {
                 api(AndroidX.AppCompat.appCompat)
                 api(AndroidX.Core.coreKtx)
                 implementation(Ktor.clientAndroid)
-                implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
-                implementation("com.squareup.sqldelight:android-driver:${SqlDelight.version}")
+                implementation(AndroidX.Lifecycle.viewModelKtx)
+                implementation(SqlDelight.androidDriver)
             }
         }
 
@@ -64,7 +64,7 @@ kotlin {
             dependencies {
                 api(compose.preview)
                 implementation(Ktor.clientJava)
-                implementation("com.squareup.sqldelight:sqlite-driver:${SqlDelight.version}")
+                implementation(SqlDelight.sqliteDriver)
             }
         }
 
