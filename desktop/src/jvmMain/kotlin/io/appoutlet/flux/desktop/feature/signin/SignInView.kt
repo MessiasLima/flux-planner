@@ -25,6 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import io.appoutlet.flux.common.feature.signin.SignInUiState
 import io.appoutlet.flux.common.feature.signin.SignInViewModel
+import io.appoutlet.flux.desktop.common.FluxImages
 import io.appoutlet.flux.desktop.common.initialize
 import io.appoutlet.flux.desktop.di.koin
 import io.appoutlet.flux.desktop.feature.crateaccount.SignUpPage
@@ -65,7 +66,7 @@ fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuccessful:
 
             Image(
                 modifier = Modifier.width(124.dp),
-                painter = painterResource("image/icon/icon.png"),
+                painter = FluxImages.Logo,
                 contentDescription = "Application icon"
             )
 

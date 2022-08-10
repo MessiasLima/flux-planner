@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import io.appoutlet.flux.desktop.common.FluxImages
 
 @Preview
 @Composable
@@ -33,7 +34,7 @@ fun SplashView(onSuccess: () -> Unit) {
             }
 
             Image(
-                painter = painterResource("image/icon/icon.png"),
+                painter = FluxImages.Logo,
                 contentDescription = "Application icon",
                 modifier = Modifier.size(128.dp),
             )

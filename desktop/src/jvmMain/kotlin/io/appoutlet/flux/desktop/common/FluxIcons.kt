@@ -7,17 +7,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.loadSvgPainter
 import androidx.compose.ui.res.useResource
 
-object FluxIcons {
-    private const val BASE_ICON_FOLDER = "image/icon/"
-    @Composable
-    fun loadSvgResource(path: String): Painter {
-        return useResource(BASE_ICON_FOLDER + path) {
-            loadSvgPainter(
-                inputStream = it,
-                density = LocalDensity.current,
-            )
-        }
-    }
+object FluxIcons : FluxSvgLoader() {
+    override val baseFolder: String = "image/icon/"
 }
 
 val FluxIcons.Cancel: Painter

@@ -5,6 +5,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import io.appoutlet.flux.common.core.ui.FluxTheme
+import io.appoutlet.flux.desktop.common.FluxImages
 import io.appoutlet.flux.desktop.di.initKoin
 import io.appoutlet.flux.desktop.feature.splash.SplashPage
 import io.appoutlet.karavel.Karavel
@@ -22,7 +23,7 @@ fun main() {
         Window(
             onCloseRequest = ::exitApplication,
             title = "Flux planner",
-            icon = painterResource("image/icon/icon.png"),
+            icon = FluxImages.Logo,
         ) {
             window.minimumSize = Dimension(WINDOW_MIN_WIDTH, WINDOW_MIN_HEIGHT)
 
