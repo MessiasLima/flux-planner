@@ -92,16 +92,7 @@ private fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuc
                 error = isError
             )
 
-            val errorMessageAlpha = if (isError) 1f else 0f
-            Text(
-                modifier = Modifier.fillMaxWidth()
-                    .height(Spacing.Medium)
-                    .padding(start = 16.dp)
-                    .alpha(errorMessageAlpha),
-                text = "Please verify your login and password",
-                color = MaterialTheme.colorScheme.error,
-                style = MaterialTheme.typography.bodySmall,
-            )
+            ErrorMessage(isError)
 
             Spacer(modifier = Modifier.height(Spacing.Medium))
 
@@ -125,4 +116,18 @@ private fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuc
             }
         }
     }
+}
+
+@Composable
+private fun ErrorMessage(isError: Boolean) {
+    val errorMessageAlpha = if (isError) 1f else 0f
+    Text(
+        modifier = Modifier.fillMaxWidth()
+            .height(Spacing.Medium)
+            .padding(start = 16.dp)
+            .alpha(errorMessageAlpha),
+        text = "Please verify your login and password",
+        color = MaterialTheme.colorScheme.error,
+        style = MaterialTheme.typography.bodySmall,
+    )
 }
