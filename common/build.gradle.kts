@@ -14,7 +14,11 @@ group = App.group
 version = App.version
 
 kotlin {
-    android()
+    android {
+        compilations.all {
+            kotlinOptions.jvmTarget = "11"
+        }
+    }
 
     jvm("desktop") {
         compilations.all {

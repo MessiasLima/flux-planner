@@ -1,4 +1,4 @@
-CREATE TABLE UserEntity (
+CREATE TABLE IF NOT EXISTS UserEntity (
     id TEXT NOT NULL UNIQUE PRIMARY KEY ,
     email TEXT NOT NULL ,
     displayName TEXT NOT NULL,
