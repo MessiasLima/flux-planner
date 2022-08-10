@@ -47,6 +47,8 @@ kotlin {
                 implementation(kotlin(Kotlin.Dependency.test))
                 implementation(MockK.common)
                 implementation(KotlinFixture.fixture)
+                implementation(Kotlin.Dependency.Coroutines.test)
+                implementation(Ktor.clientMock)
             }
         }
 

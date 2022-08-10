@@ -8,10 +8,6 @@ import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 
-private const val SIGN_IN_END_POINT =
-    "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword"
-private const val SIGN_IN_API_KEY = "AIzaSyDnD1dMVG9WmGC8ZcHKbkW3u6pn9utqMgs"
-
 class AuthenticationApi(
     private val httpClient: HttpClient
 ) {
@@ -23,5 +19,11 @@ class AuthenticationApi(
         }
 
         return httpResponse.getResult()
+    }
+
+    companion object {
+        internal const val SIGN_IN_END_POINT =
+            "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword"
+        internal const val SIGN_IN_API_KEY = "AIzaSyDnD1dMVG9WmGC8ZcHKbkW3u6pn9utqMgs"
     }
 }

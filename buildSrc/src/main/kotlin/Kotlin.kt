@@ -15,5 +15,9 @@ object Kotlin {
 
             const val json = "org.jetbrains.kotlinx:kotlinx-serialization-json:$version"
         }
+
+        object Coroutines {
+            const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
+        }
     }
 }
