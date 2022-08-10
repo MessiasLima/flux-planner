@@ -87,7 +87,8 @@ android {
 sqldelight {
     database("FluxDB") {
         packageName = "io.appoutlet.flux.common.core.database"
-        schemaOutputDirectory = file("src/commonMain/sqldelight/io/appoutlet/flux/common/core/database")
+        schemaOutputDirectory =
+            file("src/commonMain/sqldelight/io/appoutlet/flux/common/core/database")
     }
 }
 

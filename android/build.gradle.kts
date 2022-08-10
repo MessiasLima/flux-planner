@@ -13,12 +13,12 @@ dependencies {
 }
 
 android {
-    compileSdkVersion(Android.compileSdk)
+    compileSdk = Android.compileSdk
 
     defaultConfig {
         applicationId = Android.applicationId
-        minSdkVersion(Android.minSdk)
-        targetSdkVersion(Android.targetSdk)
+        minSdk = Android.minSdk
+        targetSdk = Android.targetSdk
         versionCode = Android.versionCode
         versionName = Android.versionName
     }
@@ -32,6 +32,12 @@ android {
         getByName("release") {
             isMinifyEnabled = false
         }
+    }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = "11"
     }
 }
 
