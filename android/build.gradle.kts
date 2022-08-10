@@ -7,11 +7,6 @@ plugins {
 group = App.group
 version = App.version
 
-dependencies {
-    implementation(project(":common"))
-    implementation(AndroidX.Activity.activityCompose)
-}
-
 android {
     compileSdk = Android.compileSdk
 
@@ -33,6 +28,15 @@ android {
             isMinifyEnabled = false
         }
     }
+
+    buildFeatures {
+        compose = true
+    }
+}
+
+dependencies {
+    implementation(project(":common"))
+    implementation(AndroidX.Activity.activityCompose)
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {

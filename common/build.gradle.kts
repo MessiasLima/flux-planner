@@ -45,6 +45,8 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlin(Kotlin.Dependency.test))
+                implementation(MockK.common)
+                implementation(KotlinFixture.fixture)
             }
         }
 
@@ -68,7 +70,11 @@ kotlin {
             }
         }
 
-        val desktopTest by getting
+        val desktopTest by getting {
+            dependencies {
+                implementation(MockK.jvm)
+            }
+        }
     }
 }
 
