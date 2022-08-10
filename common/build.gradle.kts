@@ -60,7 +60,12 @@ kotlin {
             }
         }
 
-        val androidTest by getting
+        val androidTest by getting {
+            dependencies {
+                dependsOn(commonTest)
+                implementation(MockK.jvm)
+            }
+        }
 
         val desktopMain by getting {
             dependencies {
