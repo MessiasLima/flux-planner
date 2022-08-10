@@ -1,6 +1,6 @@
 package io.appoutlet.flux.common.core.network
 
-import io.appoutlet.flux.common.test.BaseUnitTest
+import io.appoutlet.flux.common.test.UnitTest
 import io.appoutlet.flux.common.test.api.ApiTest
 import io.appoutlet.flux.common.test.api.ApiTestImpl
 import io.appoutlet.flux.common.test.api.respond
@@ -13,7 +13,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 @ExperimentalCoroutinesApi
-class NetworkErrorBodyKtTest : BaseUnitTest<Unit>(), ApiTest by ApiTestImpl() {
+class NetworkErrorBodyKtTest : UnitTest<Unit>(), ApiTest by ApiTestImpl() {
     override fun buildSut() = Unit
 
     @Test

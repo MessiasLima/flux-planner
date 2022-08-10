@@ -5,7 +5,7 @@ import com.appmattus.kotlinfixture.decorator.nullability.nullabilityStrategy
 import com.appmattus.kotlinfixture.kotlinFixture
 import kotlin.test.BeforeTest
 
-abstract class BaseUnitTest<SubjectUnderTest : Any> {
+abstract class UnitTest<SubjectUnderTest : Any> {
     protected lateinit var sut: SubjectUnderTest
     protected val fixture = kotlinFixture {
         nullabilityStrategy(NeverNullStrategy)

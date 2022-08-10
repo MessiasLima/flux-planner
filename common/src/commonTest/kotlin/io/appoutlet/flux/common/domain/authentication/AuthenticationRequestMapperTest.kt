@@ -1,11 +1,11 @@
 package io.appoutlet.flux.common.domain.authentication
 
-import io.appoutlet.flux.common.test.BaseUnitTest
+import io.appoutlet.flux.common.test.UnitTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class AuthenticationRequestMapperTest : BaseUnitTest<AuthenticationRequestMapper> () {
+class AuthenticationRequestMapperTest : UnitTest<AuthenticationRequestMapper> () {
     override fun buildSut() = AuthenticationRequestMapper()
 
     @Test

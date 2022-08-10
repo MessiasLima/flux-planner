@@ -2,12 +2,12 @@ package io.appoutlet.flux.common.domain.user
 
 import io.appoutlet.flux.common.core.database.UserEntity
 import io.appoutlet.flux.common.core.network.authentication.AuthenticationResponse
-import io.appoutlet.flux.common.test.BaseUnitTest
+import io.appoutlet.flux.common.test.UnitTest
 import io.appoutlet.flux.common.util.toBoolean
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class UserDomainMapperTest : BaseUnitTest<UserDomainMapper>() {
+class UserDomainMapperTest : UnitTest<UserDomainMapper>() {
     override fun buildSut() = UserDomainMapper()
 
     @Test

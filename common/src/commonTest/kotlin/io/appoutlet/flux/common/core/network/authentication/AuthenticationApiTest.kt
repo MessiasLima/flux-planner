@@ -1,6 +1,6 @@
 package io.appoutlet.flux.common.core.network.authentication
 
-import io.appoutlet.flux.common.test.BaseUnitTest
+import io.appoutlet.flux.common.test.UnitTest
 import io.appoutlet.flux.common.test.api.ApiTest
 import io.appoutlet.flux.common.test.api.ApiTestImpl
 import io.ktor.client.engine.mock.respond
@@ -14,7 +14,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 @ExperimentalCoroutinesApi
-class AuthenticationApiTest : BaseUnitTest<AuthenticationApi>(), ApiTest by ApiTestImpl() {
+class AuthenticationApiTest : UnitTest<AuthenticationApi>(), ApiTest by ApiTestImpl() {
     override fun buildSut() = AuthenticationApi(mockHttpClient)
 
     @Test

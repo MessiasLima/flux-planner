@@ -4,14 +4,14 @@ import com.squareup.sqldelight.Query
 import io.appoutlet.flux.common.core.database.FluxDB
 import io.appoutlet.flux.common.core.database.UserEntity
 import io.appoutlet.flux.common.core.database.UserEntityQueries
-import io.appoutlet.flux.common.test.BaseUnitTest
+import io.appoutlet.flux.common.test.UnitTest
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class UserRepositoryTest : BaseUnitTest<UserRepository>() {
+class UserRepositoryTest : UnitTest<UserRepository>() {
 
     private val mockUserEntityQueries: UserEntityQueries = mockk()
     private val mockFluxDB: FluxDB = mockk<FluxDB>().also {

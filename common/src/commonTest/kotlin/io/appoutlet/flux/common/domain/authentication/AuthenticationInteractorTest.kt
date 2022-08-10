@@ -5,7 +5,7 @@ import io.appoutlet.flux.common.core.network.authentication.AuthenticationReques
 import io.appoutlet.flux.common.core.network.authentication.AuthenticationResponse
 import io.appoutlet.flux.common.domain.user.UserDomain
 import io.appoutlet.flux.common.domain.user.UserDomainMapper
-import io.appoutlet.flux.common.test.BaseUnitTest
+import io.appoutlet.flux.common.test.UnitTest
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -16,7 +16,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 @ExperimentalCoroutinesApi
-class AuthenticationInteractorTest : BaseUnitTest<AuthenticationInteractor>() {
+class AuthenticationInteractorTest : UnitTest<AuthenticationInteractor>() {
     private val mockAuthenticationApi: AuthenticationApi = mockk()
     private val mockAuthenticationRequestMapper: AuthenticationRequestMapper = mockk()
     private val mockUserDomainMapper: UserDomainMapper = mockk()
