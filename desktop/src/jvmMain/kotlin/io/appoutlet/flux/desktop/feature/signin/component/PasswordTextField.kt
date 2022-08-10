@@ -13,7 +13,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import io.appoutlet.flux.common.core.ui.error40
 import io.appoutlet.flux.desktop.common.Flux
 import io.appoutlet.flux.desktop.common.Visibility
 import io.appoutlet.flux.desktop.common.VisibilityOff

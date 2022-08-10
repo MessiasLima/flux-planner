@@ -42,23 +42,16 @@ fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuccessful:
         val isError = uiState is SignInUiState.Error
 
         if (isLoading) LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-
-        if (uiState is SignInUiState.Success) {
-            onLoginSuccessful()
-        }
+        if (uiState is SignInUiState.Success) onLoginSuccessful()
 
         Column(
             modifier = Modifier.padding(Spacing.Medium),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             var email by remember { mutableStateOf("") }
             var password by remember { mutableStateOf("") }
 
-            Image(
-                painter = FluxImages.Logo,
-                contentDescription = "Application icon"
-            )
+            Image(painter = FluxImages.Logo, contentDescription = "Application icon")
 
             Spacer(modifier = Modifier.height(Spacing.Medium))
 
@@ -74,7 +67,6 @@ fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuccessful:
                 modifier = Modifier.fillMaxWidth(),
                 value = email,
                 onValueChange = { email = it },
-                onClearIconClick = { email = "" },
                 enabled = !isLoading,
                 error = isError
             )
@@ -91,8 +83,7 @@ fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuccessful:
 
             val errorMessageAlpha = if (isError) 1f else 0f
             Text(
-                modifier = Modifier
-                    .fillMaxWidth()
+                modifier = Modifier.fillMaxWidth()
                     .height(Spacing.Medium)
                     .padding(start = 16.dp)
                     .alpha(errorMessageAlpha),
@@ -111,15 +102,16 @@ fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuccessful:
 
             Spacer(modifier = Modifier.height(Spacing.Small))
 
-            TextButton(
-                enabled = !isLoading,
-                onClick = { karavel?.navigate(SignUpPage()) },
-            ) { Text("Create account") }
+            TextButton(enabled = !isLoading, onClick = { karavel?.navigate(SignUpPage()) }) {
+                Text("Create account")
+            }
 
             TextButton(
                 enabled = !isLoading,
                 onClick = { karavel?.navigate(PasswordRecoveryPage()) },
-            ) { Text("Forgot password") }
+            ) {
+                Text("Forgot password")
+            }
         }
     }
 }

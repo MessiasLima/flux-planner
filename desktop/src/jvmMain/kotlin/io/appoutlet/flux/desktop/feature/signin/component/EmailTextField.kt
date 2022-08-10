@@ -12,7 +12,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import io.appoutlet.flux.common.core.ui.error40
 import io.appoutlet.flux.desktop.common.Cancel
 import io.appoutlet.flux.desktop.common.Flux
 
@@ -21,7 +20,6 @@ fun EmailTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
-    onClearIconClick: () -> Unit,
     enabled: Boolean,
     error: Boolean,
 ) {
@@ -42,7 +40,7 @@ fun EmailTextField(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = rememberRipple(bounded = false),
                         enabled = true,
-                        onClick = onClearIconClick,
+                        onClick = { onValueChange("") },
                     ),
                     painter = Icons.Flux.Cancel,
                     contentDescription = "Clear",

@@ -1,7 +1,6 @@
 @file:JvmName("Flux")
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import io.appoutlet.flux.common.core.ui.FluxTheme

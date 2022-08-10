@@ -3,9 +3,6 @@ package io.appoutlet.flux.desktop.common
 import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.loadSvgPainter
-import androidx.compose.ui.res.useResource
 
 object FluxIcons : FluxSvgLoader() {
     override val baseFolder: String = "image/icon/"
