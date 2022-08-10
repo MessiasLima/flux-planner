@@ -20,7 +20,7 @@ import io.appoutlet.karavel.Karavel
 
 @ExperimentalFoundationApi
 @Composable
-fun LoginView() {
+fun LoginView(mainKaravel: Karavel?) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.surfaceVariant
@@ -30,7 +30,7 @@ fun LoginView() {
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            val loginKaravel = Karavel(SignInPage())
+            val loginKaravel = Karavel(SignInPage(mainKaravel))
             Card(
                 modifier = Modifier.width(432.dp),
                 shape = shapeMedium,

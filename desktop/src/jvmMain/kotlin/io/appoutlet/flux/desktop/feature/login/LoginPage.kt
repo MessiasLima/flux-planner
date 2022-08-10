@@ -8,6 +8,6 @@ import io.appoutlet.karavel.Page
 class LoginPage : Page() {
     @Composable
     override fun content() {
-        LoginView()
+        LoginView(karavel)
     }
 }

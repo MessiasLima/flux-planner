@@ -34,18 +34,26 @@ import io.appoutlet.flux.desktop.feature.signin.component.PasswordTextField
 import io.appoutlet.karavel.Karavel
 
 @Composable
-fun SignInView(karavel: Karavel?, viewModel: SignInViewModel = koin.get()) {
+fun SignInView(
+    karavel: Karavel?,
+    viewModel: SignInViewModel = koin.get(),
+    onLoginSuccessful: () -> Unit,
+) {
     viewModel.initialize()
-    SignInForm(viewModel, karavel)
+    SignInForm(viewModel, karavel, onLoginSuccessful)
 }
 
 @Composable
-fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?) {
+fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuccessful: () -> Unit) {
     Box {
         val uiState: SignInUiState by viewModel.uiState.collectAsState(initial = SignInUiState.Idle)
         val isLoading = uiState is SignInUiState.Loading
 
         if (isLoading) LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+
+        if (uiState is SignInUiState.Success) {
+            onLoginSuccessful()
+        }
 
         Column(
             modifier = Modifier.padding(24.dp),
