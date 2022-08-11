@@ -8,7 +8,7 @@ actual abstract class BaseViewModel {
     protected actual val viewModelScope: CoroutineScope
         get() = _viewModelScope
 
-    fun init(composableScope: CoroutineScope) {
+    actual fun init(composableScope: CoroutineScope) {
         _viewModelScope = composableScope
     }
 }
