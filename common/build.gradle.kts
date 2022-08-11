@@ -45,10 +45,10 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlin(Kotlin.Dependency.test))
-                implementation(MockK.common)
                 implementation(KotlinFixture.fixture)
                 implementation(Kotlin.Dependency.Coroutines.test)
                 implementation(Ktor.clientMock)
+                api(MockK.jvm)
             }
         }
 
@@ -66,7 +66,6 @@ kotlin {
         val androidTest by getting {
             dependencies {
                 dependsOn(commonTest)
-                implementation(MockK.jvm)
             }
         }
 
