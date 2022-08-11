@@ -54,6 +54,7 @@ kotlin {
 
         val androidMain by getting {
             dependencies {
+                dependsOn(commonMain)
                 api(AndroidX.AppCompat.appCompat)
                 api(AndroidX.Core.coreKtx)
                 implementation(Ktor.clientAndroid)
@@ -71,6 +72,7 @@ kotlin {
 
         val desktopMain by getting {
             dependencies {
+                dependsOn(commonMain)
                 api(compose.preview)
                 implementation(Ktor.clientJava)
                 implementation(SqlDelight.sqliteDriver)
@@ -79,6 +81,7 @@ kotlin {
 
         val desktopTest by getting {
             dependencies {
+                dependsOn(commonTest)
                 implementation(MockK.jvm)
             }
         }

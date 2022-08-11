@@ -13,7 +13,7 @@ class AuthenticationRequestMapperTest : UnitTest<AuthenticationRequestMapper> ()
         val fixtEmail: String = fixture()
         val fixtPassword: String = fixture()
 
-        val actual  = sut.map(email = fixtEmail, password = fixtPassword)
+        val actual = sut.map(email = fixtEmail, password = fixtPassword)
 
         assertEquals(fixtEmail, actual.email)
         assertEquals(fixtPassword, actual.password)
