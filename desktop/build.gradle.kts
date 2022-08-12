@@ -1,4 +1,4 @@
-@file:Suppress("UNUSED_VARIABLE")
+@file:Suppress("UNUSED_VARIABLE", "OPT_IN_IS_NOT_ENABLED")
 
 import org.jetbrains.compose.compose
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
@@ -31,12 +31,15 @@ kotlin {
         }
 
         val jvmTest by getting {
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             dependencies {
                 implementation(kotlin(Kotlin.Dependency.test))
                 implementation(KotlinFixture.fixture)
                 implementation(Kotlin.Dependency.Coroutines.test)
                 implementation(Ktor.clientMock)
                 implementation(MockK.jvm)
+                implementation(compose.uiTestJUnit4)
+                implementation(compose.desktop.currentOs)
             }
         }
     }
