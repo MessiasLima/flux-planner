@@ -57,7 +57,12 @@ apply(from = "$rootDir/scripts/detekt.gradle")
 
 // region kover setup
 val includePatterns = listOf("io.appoutlet.flux.*")
-val excludePatterns = listOf("io.appoutlet.flux.*.*Test")
+val excludePatterns = listOf(
+    "**Test",
+    "**BuildConfig**",
+    "**ModulesKt",
+    "**ModuleKt",
+)
 
 kover {
     isDisabled.set(false) // true to disable instrumentation and all Kover tasks in this project
@@ -85,9 +90,4 @@ kover {
         }
     }
 }
-
-koverMerged {
-    enable()
-}
-
 // endregion
