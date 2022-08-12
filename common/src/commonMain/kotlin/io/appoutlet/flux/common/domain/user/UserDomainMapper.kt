@@ -1,6 +1,6 @@
 package io.appoutlet.flux.common.domain.user
 
-import io.appoutlet.flux.common.core.database.UserEntity
+import io.appoutlet.flux.common.core.database.generated.UserEntity
 import io.appoutlet.flux.common.core.network.authentication.AuthenticationResponse
 import io.appoutlet.flux.common.util.toBoolean
 

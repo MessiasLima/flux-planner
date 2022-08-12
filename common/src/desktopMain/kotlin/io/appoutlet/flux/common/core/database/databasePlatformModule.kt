@@ -2,6 +2,7 @@ package io.appoutlet.flux.common.core.database
 
 import com.squareup.sqldelight.db.SqlDriver
 import com.squareup.sqldelight.sqlite.driver.JdbcSqliteDriver
+import io.appoutlet.flux.common.core.database.generated.FluxDB
 import org.koin.dsl.module
 
 // private const val DATABASE_PATH = "jdbc:sqlite:HOME/.config/flux/data/flux.db"

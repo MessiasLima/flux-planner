@@ -1,7 +1,7 @@
 package io.appoutlet.flux.common.core.database.user
 
-import io.appoutlet.flux.common.core.database.FluxDB
-import io.appoutlet.flux.common.core.database.UserEntity
+import io.appoutlet.flux.common.core.database.generated.FluxDB
+import io.appoutlet.flux.common.core.database.generated.UserEntity
 
 class UserRepository(
     private val database: FluxDB

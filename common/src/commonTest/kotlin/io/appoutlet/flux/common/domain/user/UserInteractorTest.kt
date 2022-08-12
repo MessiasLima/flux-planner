@@ -1,6 +1,6 @@
 package io.appoutlet.flux.common.domain.user
 
-import io.appoutlet.flux.common.core.database.UserEntity
+import io.appoutlet.flux.common.core.database.generated.UserEntity
 import io.appoutlet.flux.common.core.database.user.UserRepository
 import io.appoutlet.flux.common.test.UnitTest
 import io.mockk.every

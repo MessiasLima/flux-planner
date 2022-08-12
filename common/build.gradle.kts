@@ -106,9 +106,9 @@ android {
 
 sqldelight {
     database("FluxDB") {
-        packageName = "io.appoutlet.flux.common.core.database"
+        packageName = "io.appoutlet.flux.common.core.database.generated"
         schemaOutputDirectory =
-            file("src/commonMain/sqldelight/io/appoutlet/flux/common/core/database")
+            file("src/commonMain/sqldelight/io/appoutlet/flux/common/core/database/generated")
     }
 }
 
@@ -117,10 +117,11 @@ apply(from = "$rootDir/scripts/detekt.gradle")
 // region kover setup
 val includePatterns = listOf("io.appoutlet.flux.*")
 val excludePatterns = listOf(
-    "**Test",
+    "*.*Test",
     "**BuildConfig**",
     "**ModulesKt",
-    "**ModuleKt",
+    "*.*ModuleKt",
+    "*.generated.*",
 )
 
 kover {
@@ -142,7 +143,7 @@ kover {
             target = kotlinx.kover.api.VerificationTarget.ALL
 
             bound { // add rule bound
-                minValue = 80
+                minValue = 76
                 counter = kotlinx.kover.api.CounterType.LINE
                 valueType = kotlinx.kover.api.VerificationValueType.COVERED_PERCENTAGE
             }

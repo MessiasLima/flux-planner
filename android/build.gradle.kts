@@ -76,7 +76,7 @@ kover {
 
     verify {
         onCheck.set(true)
-        isDisabled.set(false)
+        isDisabled.set(true)
         rule {
             isEnabled = true
             name = null

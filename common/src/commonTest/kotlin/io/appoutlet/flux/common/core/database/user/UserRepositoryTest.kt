@@ -1,9 +1,9 @@
 package io.appoutlet.flux.common.core.database.user
 
 import com.squareup.sqldelight.Query
-import io.appoutlet.flux.common.core.database.FluxDB
-import io.appoutlet.flux.common.core.database.UserEntity
-import io.appoutlet.flux.common.core.database.UserEntityQueries
+import io.appoutlet.flux.common.core.database.generated.FluxDB
+import io.appoutlet.flux.common.core.database.generated.UserEntity
+import io.appoutlet.flux.common.core.database.generated.UserEntityQueries
 import io.appoutlet.flux.common.test.UnitTest
 import io.mockk.every
 import io.mockk.mockk
