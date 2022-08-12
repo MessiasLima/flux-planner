@@ -25,7 +25,7 @@ jobs:
       run: ./gradlew detekt
       
     - name: Unit tests
-      run: ./gradlew test koverReport koverMergedReport koverMergedVerify
+      run: ./gradlew test koverVerify
 
     - name: upload test reports
       uses: actions/upload-artifact@v3

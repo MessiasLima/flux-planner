@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS UserEntity (
+    id TEXT NOT NULL UNIQUE PRIMARY KEY ,
+    email TEXT NOT NULL ,
+    displayName TEXT NOT NULL,
+    idToken TEXT NOT NULL,
+    refreshToken TEXT,
+    registered INTEGER NOT NULL
+);
+
+findAll:
+SELECT * FROM UserEntity;
+
+findById:
+SELECT * FROM UserEntity WHERE id = ?;
+
+save:
+INSERT OR REPLACE INTO UserEntity VALUES (?,?,?,?,?,?);

@@ -11,4 +11,8 @@ object AndroidX {
     object Core {
         const val coreKtx = "androidx.core:core-ktx:1.8.0"
     }
+
+    object Lifecycle {
+        const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    }
 }

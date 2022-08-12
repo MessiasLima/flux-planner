@@ -9,6 +9,6 @@ object Android {
     object Plugin {
         const val application = "com.android.application"
         const val library = "com.android.library"
-        const val version = "7.1.3"
+        const val version = "7.2.2"
     }
 }
