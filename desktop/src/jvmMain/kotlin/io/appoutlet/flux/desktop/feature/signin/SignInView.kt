@@ -27,12 +27,12 @@ import io.appoutlet.flux.common.core.ui.Spacing
 import io.appoutlet.flux.common.feature.signin.SignInUiState
 import io.appoutlet.flux.common.feature.signin.SignInViewModel
 import io.appoutlet.flux.desktop.common.FluxImages
+import io.appoutlet.flux.desktop.common.components.DefaultTextField
+import io.appoutlet.flux.desktop.common.components.PasswordTextField
 import io.appoutlet.flux.desktop.common.initialize
 import io.appoutlet.flux.desktop.di.koin
 import io.appoutlet.flux.desktop.feature.crateaccount.CreateAccountPage
 import io.appoutlet.flux.desktop.feature.passwordrecovery.PasswordRecoveryPage
-import io.appoutlet.flux.desktop.feature.signin.component.EmailTextField
-import io.appoutlet.flux.desktop.feature.signin.component.PasswordTextField
 import io.appoutlet.karavel.Karavel
 
 @Composable
@@ -74,12 +74,13 @@ private fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuc
 
             Spacer(modifier = Modifier.height(Spacing.Large))
 
-            EmailTextField(
+            DefaultTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = email,
                 onValueChange = { email = it },
                 enabled = !isLoading,
-                error = isError
+                error = isError,
+                label = "Email"
             )
 
             Spacer(modifier = Modifier.height(Spacing.Medium))

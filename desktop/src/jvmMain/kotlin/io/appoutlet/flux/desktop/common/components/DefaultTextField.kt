@@ -1,24 +1,23 @@
-package io.appoutlet.flux.desktop.feature.signin.component
+package io.appoutlet.flux.desktop.common.components
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.material.IconButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import io.appoutlet.flux.desktop.common.Cancel
 import io.appoutlet.flux.desktop.common.Flux
 
 @Composable
-fun EmailTextField(
+fun DefaultTextField(
     modifier: Modifier = Modifier,
     value: String,
+    label: String? = null,
     onValueChange: (String) -> Unit,
     enabled: Boolean,
     error: Boolean,
@@ -30,26 +29,27 @@ fun EmailTextField(
         value = value,
         onValueChange = onValueChange,
         label = {
-            Text(text = "Email")
+            label?.let { Text(text = it) }
         },
         textStyle = MaterialTheme.typography.bodyLarge,
         trailingIcon = {
             if (value.isNotBlank()) {
-                Icon(
-                    modifier = Modifier.clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = rememberRipple(bounded = false),
-                        enabled = true,
-                        onClick = { onValueChange("") },
-                    ),
-                    painter = Icons.Flux.Cancel,
-                    contentDescription = "Clear",
-                    tint = iconTint
-                )
+                IconButton(onClick = { onValueChange("") }) {
+                    Icon(
+                        painter = Icons.Flux.Cancel,
+                        contentDescription = "Clear",
+                        tint = iconTint
+                    )
+                }
             }
         },
         singleLine = true,
         enabled = enabled,
-        isError = error
+        isError = error,
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            cursorColor = MaterialTheme.colorScheme.primary,
+            focusedBorderColor = MaterialTheme.colorScheme.primary,
+            focusedLabelColor = MaterialTheme.colorScheme.primary
+        )
     )
 }

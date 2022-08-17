@@ -78,7 +78,7 @@ val lightColors = lightColorScheme(
     background = neutral99,
     onBackground = neutral10,
     surface = neutral99,
-    onSurface = neutral10,
+    onSurface = primary50,
 
     surfaceVariant = neutralVariant90,
     onSurfaceVariant = neutralVariant30,

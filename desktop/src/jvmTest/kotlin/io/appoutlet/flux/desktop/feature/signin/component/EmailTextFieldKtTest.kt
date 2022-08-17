@@ -6,6 +6,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import io.appoutlet.flux.desktop.common.components.DefaultTextField
 import org.junit.Rule
 import org.junit.Test
 
@@ -17,7 +18,7 @@ class EmailTextFieldKtTest {
     fun `should show value`() {
         val fixtValue = "some value"
         composeTestRule.setContent {
-            EmailTextField(value = fixtValue, onValueChange = {}, enabled = true, error = false)
+            DefaultTextField(value = fixtValue, onValueChange = {}, enabled = true, error = false)
         }
 
         composeTestRule.onNodeWithText(fixtValue)
@@ -29,7 +30,7 @@ class EmailTextFieldKtTest {
     @Test
     fun `should show idle state`() {
         composeTestRule.setContent {
-            EmailTextField(value = "", onValueChange = {}, enabled = true, error = false)
+            DefaultTextField(value = "", onValueChange = {}, enabled = true, error = false)
         }
 
         composeTestRule.onNodeWithContentDescription("Clear")
@@ -43,7 +44,7 @@ class EmailTextFieldKtTest {
     @Test
     fun `should show disable`() {
         composeTestRule.setContent {
-            EmailTextField(value = "", onValueChange = {}, enabled = false, error = false)
+            DefaultTextField(value = "", onValueChange = {}, enabled = false, error = false)
         }
 
         composeTestRule.onNodeWithContentDescription("Clear")
