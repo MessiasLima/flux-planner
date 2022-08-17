@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import io.appoutlet.flux.desktop.common.Flux
@@ -27,6 +28,7 @@ fun PasswordTextField(
     onValueChange: (String) -> Unit,
     enabled: Boolean,
     error: Boolean,
+    leadingIcon: Painter? = null,
 ) {
     var showPassword by remember { mutableStateOf(false) }
     val icon = if (showPassword) Icons.Flux.VisibilityOff else Icons.Flux.Visibility
@@ -46,6 +48,15 @@ fun PasswordTextField(
             Text(text = "Password")
         },
         textStyle = MaterialTheme.typography.bodyLarge,
+        leadingIcon = leadingIcon?.let {
+            {
+                Icon(
+                    painter = it,
+                    contentDescription = "Leading icon",
+                    tint = iconTint
+                )
+            }
+        },
         trailingIcon = {
             IconButton(onClick = { showPassword = !showPassword }) {
                 Icon(

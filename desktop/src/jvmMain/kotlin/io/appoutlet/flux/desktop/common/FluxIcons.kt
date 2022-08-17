@@ -28,6 +28,10 @@ val FluxIcons.Mail: Painter
     @Composable
     get() = loadSvgResource("ic_mail.svg")
 
+val FluxIcons.Key: Painter
+    @Composable
+    get() = loadSvgResource("ic_key.svg")
+
 @Suppress("UNUSED")
 val Icons.Flux: FluxIcons
     get() = FluxIcons
