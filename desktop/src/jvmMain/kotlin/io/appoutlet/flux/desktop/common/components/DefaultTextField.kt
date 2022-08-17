@@ -10,6 +10,7 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import io.appoutlet.flux.desktop.common.Cancel
 import io.appoutlet.flux.desktop.common.Flux
 
@@ -22,6 +23,7 @@ fun DefaultTextField(
     onValueChange: (String) -> Unit,
     enabled: Boolean,
     error: Boolean,
+    leadingIcon: Painter? = null,
 ) {
     val iconTint = if (error) MaterialTheme.colorScheme.error else LocalContentColor.current
 
@@ -33,6 +35,15 @@ fun DefaultTextField(
             label?.let { Text(text = it) }
         },
         textStyle = MaterialTheme.typography.bodyLarge,
+        leadingIcon = leadingIcon?.let {
+            {
+                Icon(
+                    painter = it,
+                    contentDescription = "Leading icon",
+                    tint = iconTint
+                )
+            }
+        },
         trailingIcon = {
             if (value.isNotBlank()) {
                 IconButton(onClick = { onValueChange("") }) {

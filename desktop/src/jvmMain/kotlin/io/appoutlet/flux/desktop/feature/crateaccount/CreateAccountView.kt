@@ -17,6 +17,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import io.appoutlet.flux.common.core.ui.Spacing
+import io.appoutlet.flux.desktop.common.AccountCircle
+import io.appoutlet.flux.desktop.common.Flux
 import io.appoutlet.flux.desktop.common.components.DefaultTextField
 import io.appoutlet.karavel.Karavel
 
@@ -34,7 +36,8 @@ fun CreateAccountView(karavel: Karavel?) {
             onValueChange = { name = it },
             label = "Name",
             error = false,
-            enabled = true
+            enabled = true,
+            leadingIcon = Icons.Flux.AccountCircle
         )
     }
 }

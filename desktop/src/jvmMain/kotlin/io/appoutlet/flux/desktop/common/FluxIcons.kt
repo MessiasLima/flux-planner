@@ -20,6 +20,10 @@ val FluxIcons.VisibilityOff: Painter
     @Composable
     get() = loadSvgResource("ic_visibility_off.svg")
 
+val FluxIcons.AccountCircle: Painter
+    @Composable
+    get() = loadSvgResource("ic_account_circle.svg")
+
 @Suppress("UNUSED")
 val Icons.Flux: FluxIcons
     get() = FluxIcons
