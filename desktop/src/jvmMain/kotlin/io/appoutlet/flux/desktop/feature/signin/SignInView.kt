@@ -21,7 +21,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
 import io.appoutlet.flux.common.core.ui.Spacing
 import io.appoutlet.flux.common.feature.signin.SignInUiState
@@ -29,6 +28,7 @@ import io.appoutlet.flux.common.feature.signin.SignInViewModel
 import io.appoutlet.flux.desktop.common.FluxImages
 import io.appoutlet.flux.desktop.common.components.DefaultTextField
 import io.appoutlet.flux.desktop.common.components.PasswordTextField
+import io.appoutlet.flux.desktop.common.components.TextFieldErrorMessage
 import io.appoutlet.flux.desktop.common.initialize
 import io.appoutlet.flux.desktop.di.koin
 import io.appoutlet.flux.desktop.feature.crateaccount.CreateAccountPage
@@ -93,7 +93,7 @@ private fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuc
                 error = isError
             )
 
-            ErrorMessage(isError)
+            TextFieldErrorMessage(isError, "Please verify your login and password")
 
             Spacer(modifier = Modifier.height(Spacing.Medium))
 
@@ -117,18 +117,4 @@ private fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuc
             }
         }
     }
-}
-
-@Composable
-private fun ErrorMessage(isError: Boolean) {
-    val errorMessageAlpha = if (isError) 1f else 0f
-    Text(
-        modifier = Modifier.fillMaxWidth()
-            .height(Spacing.Medium)
-            .padding(start = 16.dp)
-            .alpha(errorMessageAlpha),
-        text = "Please verify your login and password",
-        color = MaterialTheme.colorScheme.error,
-        style = MaterialTheme.typography.bodySmall,
-    )
 }

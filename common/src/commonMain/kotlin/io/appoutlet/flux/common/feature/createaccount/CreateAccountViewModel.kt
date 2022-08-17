@@ -55,7 +55,6 @@ class CreateAccountViewModel : BaseViewModel() {
     }
 
     fun submit() {
-
     }
 }
 

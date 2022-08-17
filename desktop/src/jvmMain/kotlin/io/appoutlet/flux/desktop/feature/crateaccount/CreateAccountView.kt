@@ -26,6 +26,7 @@ import io.appoutlet.flux.desktop.common.Key
 import io.appoutlet.flux.desktop.common.Mail
 import io.appoutlet.flux.desktop.common.components.DefaultTextField
 import io.appoutlet.flux.desktop.common.components.PasswordTextField
+import io.appoutlet.flux.desktop.common.components.TextFieldErrorMessage
 import io.appoutlet.karavel.Karavel
 
 @Composable
@@ -33,58 +34,7 @@ fun CreateAccountView(karavel: Karavel?, viewModel: CreateAccountViewModel) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         TopBar(onBackClicked = { karavel?.back() })
 
-        val name by viewModel.name.collectAsState()
-        val email by viewModel.email.collectAsState()
-        val password by viewModel.password.collectAsState()
-        val passwordConfirmation by viewModel.passwordConfirmation.collectAsState()
-
-        DefaultTextField(
-            modifier = Modifier.fillMaxWidth()
-                .padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
-            value = name.value,
-            onValueChange = { viewModel.onNameChange(it) },
-            label = "Name",
-            error = !name.isValid,
-            enabled = true,
-            leadingIcon = Icons.Flux.AccountCircle
-        )
-
-        DefaultTextField(
-            modifier = Modifier.fillMaxWidth()
-                .padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
-            value = email.value,
-            onValueChange = { viewModel.onEmailChange(it) },
-            label = "Email",
-            error = !email.isValid,
-            enabled = true,
-            leadingIcon = Icons.Flux.Mail,
-        )
-
-        PasswordTextField(
-            modifier = Modifier.fillMaxWidth()
-                .padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
-            value = password.value,
-            onValueChange = { viewModel.onPasswordChange(it) },
-            enabled = true,
-            error = !password.isValid,
-            leadingIcon = Icons.Flux.Key
-        )
-
-        PasswordTextField(
-            modifier = Modifier.fillMaxWidth()
-                .padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
-            value = passwordConfirmation.value,
-            onValueChange = { viewModel.onPasswordConfirmationChange(it) },
-            enabled = true,
-            error = !passwordConfirmation.isValid,
-            leadingIcon = Icons.Flux.Key
-        )
-
-        Spacer(modifier = Modifier.height(Spacing.Large))
-
-        Button(enabled = isReadyToSubmit(email, password), onClick = { viewModel.submit() }) {
-            Text("CREATE ACCOUNT")
-        }
+        CreateAccountContent(viewModel)
 
         Spacer(modifier = Modifier.height(Spacing.Medium))
     }
@@ -110,4 +60,64 @@ private fun TopBar(onBackClicked: () -> Unit) {
             Text(text = "Create account")
         },
     )
+}
+
+@Composable
+private fun CreateAccountContent(viewModel: CreateAccountViewModel) {
+    Column(
+        modifier = Modifier.padding(horizontal = Spacing.Medium),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        val name by viewModel.name.collectAsState()
+        val email by viewModel.email.collectAsState()
+        val password by viewModel.password.collectAsState()
+        val passwordConfirmation by viewModel.passwordConfirmation.collectAsState()
+
+        DefaultTextField(
+            modifier = Modifier.fillMaxWidth().padding(top = Spacing.Small),
+            value = name.value,
+            onValueChange = { viewModel.onNameChange(it) },
+            label = "Name",
+            error = !name.isValid,
+            enabled = true,
+            leadingIcon = Icons.Flux.AccountCircle
+        )
+        TextFieldErrorMessage(!name.isValid, "Invalid name")
+
+        DefaultTextField(
+            modifier = Modifier.fillMaxWidth().padding(top = Spacing.VerySmall),
+            value = email.value,
+            onValueChange = { viewModel.onEmailChange(it) },
+            label = "Email",
+            error = !email.isValid,
+            enabled = true,
+            leadingIcon = Icons.Flux.Mail,
+        )
+        TextFieldErrorMessage(!email.isValid, "Invalid email")
+
+        PasswordTextField(
+            modifier = Modifier.fillMaxWidth().padding(top = Spacing.VerySmall),
+            value = password.value,
+            onValueChange = { viewModel.onPasswordChange(it) },
+            enabled = true,
+            error = !password.isValid,
+            leadingIcon = Icons.Flux.Key
+        )
+
+        PasswordTextField(
+            modifier = Modifier.fillMaxWidth().padding(top = Spacing.Medium),
+            value = passwordConfirmation.value,
+            onValueChange = { viewModel.onPasswordConfirmationChange(it) },
+            enabled = true,
+            error = !passwordConfirmation.isValid,
+            leadingIcon = Icons.Flux.Key
+        )
+        TextFieldErrorMessage(!passwordConfirmation.isValid, "The passwords are not equal")
+
+        Spacer(modifier = Modifier.height(Spacing.Small))
+
+        Button(enabled = isReadyToSubmit(email, password), onClick = { viewModel.submit() }) {
+            Text("CREATE ACCOUNT")
+        }
+    }
 }
