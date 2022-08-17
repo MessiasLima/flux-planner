@@ -26,9 +26,6 @@ fun CreateAccountView(karavel: Karavel?) {
         TopBar { karavel?.back() }
 
         var name by remember { mutableStateOf("") }
-        var email by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
-        var passwordConfirmation by remember { mutableStateOf("") }
 
         DefaultTextField(
             modifier = Modifier.fillMaxWidth()
@@ -36,15 +33,6 @@ fun CreateAccountView(karavel: Karavel?) {
             value = name,
             onValueChange = { name = it },
             label = "Name",
-            error = false,
-            enabled = true
-        )
-
-        DefaultTextField(
-            modifier = Modifier.fillMaxWidth()
-                .padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
-            value = name,
-            onValueChange = { name = it },
             error = false,
             enabled = true
         )

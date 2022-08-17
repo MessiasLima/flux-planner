@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import io.appoutlet.flux.desktop.common.Cancel
 import io.appoutlet.flux.desktop.common.Flux
 
+@Suppress("LongParameterList")
 @Composable
 fun DefaultTextField(
     modifier: Modifier = Modifier,
