@@ -1,10 +1,13 @@
 package io.appoutlet.flux.desktop.feature.crateaccount
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -28,11 +31,12 @@ import io.appoutlet.karavel.Karavel
 @Composable
 fun CreateAccountView(karavel: Karavel?) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        TopBar { karavel?.back() }
+        TopBar(onBackClicked =  { karavel?.back() })
 
         var name by remember { mutableStateOf("") }
         var email by remember { mutableStateOf("") }
         var password by remember { mutableStateOf("") }
+        var passwordConfirmation by remember { mutableStateOf("") }
 
         DefaultTextField(
             modifier = Modifier.fillMaxWidth()
@@ -65,6 +69,24 @@ fun CreateAccountView(karavel: Karavel?) {
             error = false,
             leadingIcon = Icons.Flux.Key
         )
+
+        PasswordTextField(
+            modifier = Modifier.fillMaxWidth()
+                .padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
+            value = passwordConfirmation,
+            onValueChange = { passwordConfirmation = it },
+            enabled = true,
+            error = false,
+            leadingIcon = Icons.Flux.Key
+        )
+
+        Spacer(modifier = Modifier.height(Spacing.Large))
+
+        Button(onClick = {}) {
+            Text("CREATE ACCOUNT")
+        }
+
+        Spacer(modifier = Modifier.height(Spacing.Medium))
     }
 }
 
