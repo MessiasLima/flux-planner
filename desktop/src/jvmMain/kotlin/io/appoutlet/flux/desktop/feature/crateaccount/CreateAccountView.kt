@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import io.appoutlet.flux.common.core.ui.Spacing
 import io.appoutlet.flux.desktop.common.AccountCircle
 import io.appoutlet.flux.desktop.common.Flux
+import io.appoutlet.flux.desktop.common.Mail
 import io.appoutlet.flux.desktop.common.components.DefaultTextField
 import io.appoutlet.karavel.Karavel
 
@@ -28,6 +29,7 @@ fun CreateAccountView(karavel: Karavel?) {
         TopBar { karavel?.back() }
 
         var name by remember { mutableStateOf("") }
+        var email by remember { mutableStateOf("") }
 
         DefaultTextField(
             modifier = Modifier.fillMaxWidth()
@@ -38,6 +40,17 @@ fun CreateAccountView(karavel: Karavel?) {
             error = false,
             enabled = true,
             leadingIcon = Icons.Flux.AccountCircle
+        )
+
+        DefaultTextField(
+            modifier = Modifier.fillMaxWidth()
+                .padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
+            value = email,
+            onValueChange = { email = it },
+            label = "Email",
+            error = false,
+            enabled = true,
+            leadingIcon = Icons.Flux.Mail
         )
     }
 }
