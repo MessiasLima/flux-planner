@@ -5,8 +5,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 
 @Composable
-fun FluxTheme(content: @Composable () -> Unit) {
-    val colors = if (isSystemInDarkTheme()) darkColors else lightColors
+fun FluxTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+    val colors = if (darkTheme) darkColors else lightColors
 
     MaterialTheme(
         colorScheme = colors,
