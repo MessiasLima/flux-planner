@@ -13,13 +13,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import io.appoutlet.flux.common.core.ui.Spacing
+import io.appoutlet.flux.common.feature.createaccount.CreateAccountViewModel
+import io.appoutlet.flux.common.feature.createaccount.InputValue
 import io.appoutlet.flux.desktop.common.AccountCircle
 import io.appoutlet.flux.desktop.common.Flux
 import io.appoutlet.flux.desktop.common.Key
@@ -29,22 +29,22 @@ import io.appoutlet.flux.desktop.common.components.PasswordTextField
 import io.appoutlet.karavel.Karavel
 
 @Composable
-fun CreateAccountView(karavel: Karavel?) {
+fun CreateAccountView(karavel: Karavel?, viewModel: CreateAccountViewModel) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        TopBar(onBackClicked =  { karavel?.back() })
+        TopBar(onBackClicked = { karavel?.back() })
 
-        var name by remember { mutableStateOf("") }
-        var email by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
-        var passwordConfirmation by remember { mutableStateOf("") }
+        val name by viewModel.name.collectAsState()
+        val email by viewModel.email.collectAsState()
+        val password by viewModel.password.collectAsState()
+        val passwordConfirmation by viewModel.passwordConfirmation.collectAsState()
 
         DefaultTextField(
             modifier = Modifier.fillMaxWidth()
                 .padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
-            value = name,
-            onValueChange = { name = it },
+            value = name.value,
+            onValueChange = { viewModel.onNameChange(it) },
             label = "Name",
-            error = false,
+            error = !name.isValid,
             enabled = true,
             leadingIcon = Icons.Flux.AccountCircle
         )
@@ -52,42 +52,47 @@ fun CreateAccountView(karavel: Karavel?) {
         DefaultTextField(
             modifier = Modifier.fillMaxWidth()
                 .padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
-            value = email,
-            onValueChange = { email = it },
+            value = email.value,
+            onValueChange = { viewModel.onEmailChange(it) },
             label = "Email",
-            error = false,
+            error = !email.isValid,
             enabled = true,
-            leadingIcon = Icons.Flux.Mail
+            leadingIcon = Icons.Flux.Mail,
         )
 
         PasswordTextField(
             modifier = Modifier.fillMaxWidth()
                 .padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
-            value = password,
-            onValueChange = { password = it },
+            value = password.value,
+            onValueChange = { viewModel.onPasswordChange(it) },
             enabled = true,
-            error = false,
+            error = !password.isValid,
             leadingIcon = Icons.Flux.Key
         )
 
         PasswordTextField(
             modifier = Modifier.fillMaxWidth()
                 .padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
-            value = passwordConfirmation,
-            onValueChange = { passwordConfirmation = it },
+            value = passwordConfirmation.value,
+            onValueChange = { viewModel.onPasswordConfirmationChange(it) },
             enabled = true,
-            error = false,
+            error = !passwordConfirmation.isValid,
             leadingIcon = Icons.Flux.Key
         )
 
         Spacer(modifier = Modifier.height(Spacing.Large))
 
-        Button(onClick = {}) {
+        Button(enabled = isReadyToSubmit(email, password), onClick = { viewModel.submit() }) {
             Text("CREATE ACCOUNT")
         }
 
         Spacer(modifier = Modifier.height(Spacing.Medium))
     }
+}
+
+private fun isReadyToSubmit(email: InputValue, password: InputValue): Boolean {
+    return email.value.isNotBlank() && email.isValid &&
+            password.value.isNotBlank() && password.isValid
 }
 
 @Composable
