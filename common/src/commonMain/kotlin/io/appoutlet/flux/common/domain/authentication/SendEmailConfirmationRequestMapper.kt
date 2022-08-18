@@ -5,6 +5,7 @@ import io.appoutlet.flux.common.domain.user.UserDomain
 
 class SendEmailConfirmationRequestMapper {
     fun map(user: UserDomain) = SendEmailConfirmationRequest(
-        idToken = user.idToken
+        idToken = user.idToken,
+        requestType = SendEmailConfirmationRequest.REQUEST_TYPE_VERIFY_EMAIL
     )
 }

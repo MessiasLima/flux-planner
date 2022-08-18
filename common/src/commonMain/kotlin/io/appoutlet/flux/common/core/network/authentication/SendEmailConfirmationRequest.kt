@@ -4,6 +4,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SendEmailConfirmationRequest(
-    val requestType: String = "VERIFY_EMAIL",
+    val requestType: String,
     val idToken: String,
-)
+) {
+    companion object {
+        const val REQUEST_TYPE_VERIFY_EMAIL = "VERIFY_EMAIL"
+    }
+}

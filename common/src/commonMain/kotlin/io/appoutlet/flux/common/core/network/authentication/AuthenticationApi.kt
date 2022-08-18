@@ -23,7 +23,7 @@ class AuthenticationApi(
         return httpResponse.getResult()
     }
 
-    suspend fun createAccount(authenticationRequest: AuthenticationRequest): AuthenticationResponse {
+    suspend fun signUpWithEmail(authenticationRequest: SignUpWithEmailRequest): SignUpWithEmailResponse {
         val httpResponse = httpClient.post(urlString = Route.Accounts.signUp()) {
             setupRequest()
             setBody(authenticationRequest)

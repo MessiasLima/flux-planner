@@ -31,7 +31,9 @@ import io.appoutlet.flux.desktop.common.components.PasswordTextField
 import io.appoutlet.flux.desktop.common.components.TextFieldErrorMessage
 import io.appoutlet.flux.desktop.common.initialize
 import io.appoutlet.karavel.Karavel
+import kotlinx.coroutines.FlowPreview
 
+@FlowPreview
 @Composable
 fun CreateAccountView(karavel: Karavel?, viewModel: CreateAccountViewModel) {
     viewModel.initialize()
@@ -72,6 +74,7 @@ private fun TopBar(onBackClicked: () -> Unit) {
     )
 }
 
+@FlowPreview
 @Composable
 private fun CreateAccountContent(viewModel: CreateAccountViewModel, uiState: CreateAccountUiState) {
     val isLoading = uiState is CreateAccountUiState.Loading

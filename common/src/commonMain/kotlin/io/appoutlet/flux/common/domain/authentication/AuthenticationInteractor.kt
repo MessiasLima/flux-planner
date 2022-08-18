@@ -11,6 +11,7 @@ class AuthenticationInteractor(
     private val userDomainMapper: UserDomainMapper,
     private val updateProfileRequestMapper: UpdateProfileRequestMapper,
     private val sendEmailConfirmationRequestMapper: SendEmailConfirmationRequestMapper,
+    private val sighUpWithEmailRequestMapper: SignUpWithEmailRequestMapper,
 ) {
     fun signIn(email: String, password: String) = flow {
         val authenticationRequest = authenticationRequestMapper.map(email, password)
@@ -20,8 +21,8 @@ class AuthenticationInteractor(
     }
 
     fun createUser(email: String, password: String) = flow {
-        val authenticationRequest = authenticationRequestMapper.map(email, password)
-        val createAccountResponse = authenticationApi.createAccount(authenticationRequest)
+        val authenticationRequest = sighUpWithEmailRequestMapper.map(email, password)
+        val createAccountResponse = authenticationApi.signUpWithEmail(authenticationRequest)
         val userDomain = userDomainMapper.map(createAccountResponse)
         emit(userDomain)
     }

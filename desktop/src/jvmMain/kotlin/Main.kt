@@ -8,11 +8,13 @@ import io.appoutlet.flux.desktop.common.FluxImages
 import io.appoutlet.flux.desktop.di.initKoin
 import io.appoutlet.flux.desktop.feature.splash.SplashPage
 import io.appoutlet.karavel.Karavel
+import kotlinx.coroutines.FlowPreview
 import java.awt.Dimension
 
 private const val WINDOW_MIN_WIDTH = 800
 private const val WINDOW_MIN_HEIGHT = 700
 
+@FlowPreview
 @ExperimentalFoundationApi
 fun main() {
     initKoin()
