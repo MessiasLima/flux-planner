@@ -18,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import io.appoutlet.flux.common.core.ui.Spacing
+import io.appoutlet.flux.common.feature.createaccount.CreateAccountUiState
 import io.appoutlet.flux.common.feature.createaccount.CreateAccountViewModel
 import io.appoutlet.flux.common.feature.createaccount.InputValue
 import io.appoutlet.flux.desktop.common.AccountCircle
@@ -25,24 +26,33 @@ import io.appoutlet.flux.desktop.common.Flux
 import io.appoutlet.flux.desktop.common.Key
 import io.appoutlet.flux.desktop.common.Mail
 import io.appoutlet.flux.desktop.common.components.DefaultTextField
+import io.appoutlet.flux.desktop.common.components.FluxProgressBar
 import io.appoutlet.flux.desktop.common.components.PasswordTextField
 import io.appoutlet.flux.desktop.common.components.TextFieldErrorMessage
+import io.appoutlet.flux.desktop.common.initialize
 import io.appoutlet.karavel.Karavel
 
 @Composable
 fun CreateAccountView(karavel: Karavel?, viewModel: CreateAccountViewModel) {
+    viewModel.initialize()
+    val uiState by viewModel.uiState.collectAsState()
+    val isLoading = uiState is CreateAccountUiState.Loading
+
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        FluxProgressBar(isLoading = isLoading)
+
         TopBar(onBackClicked = { karavel?.back() })
 
-        CreateAccountContent(viewModel)
+        CreateAccountContent(viewModel = viewModel, isLoading = isLoading)
 
         Spacer(modifier = Modifier.height(Spacing.Medium))
     }
 }
 
-private fun isReadyToSubmit(email: InputValue, password: InputValue): Boolean {
-    return email.value.isNotBlank() && email.isValid &&
-            password.value.isNotBlank() && password.isValid
+private fun isReadyToSubmit(isLoading: Boolean, email: InputValue, password: InputValue): Boolean {
+    return (!isLoading) &&
+        email.value.isNotBlank() && email.isValid &&
+        password.value.isNotBlank() && password.isValid
 }
 
 @Composable
@@ -63,7 +73,7 @@ private fun TopBar(onBackClicked: () -> Unit) {
 }
 
 @Composable
-private fun CreateAccountContent(viewModel: CreateAccountViewModel) {
+private fun CreateAccountContent(viewModel: CreateAccountViewModel, isLoading: Boolean) {
     Column(
         modifier = Modifier.padding(horizontal = Spacing.Medium),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -79,7 +89,7 @@ private fun CreateAccountContent(viewModel: CreateAccountViewModel) {
             onValueChange = { viewModel.onNameChange(it) },
             label = "Name",
             error = !name.isValid,
-            enabled = true,
+            enabled = !isLoading,
             leadingIcon = Icons.Flux.AccountCircle
         )
         TextFieldErrorMessage(!name.isValid, "Invalid name")
@@ -90,7 +100,7 @@ private fun CreateAccountContent(viewModel: CreateAccountViewModel) {
             onValueChange = { viewModel.onEmailChange(it) },
             label = "Email",
             error = !email.isValid,
-            enabled = true,
+            enabled = !isLoading,
             leadingIcon = Icons.Flux.Mail,
         )
         TextFieldErrorMessage(!email.isValid, "Invalid email")
@@ -99,7 +109,7 @@ private fun CreateAccountContent(viewModel: CreateAccountViewModel) {
             modifier = Modifier.fillMaxWidth().padding(top = Spacing.VerySmall),
             value = password.value,
             onValueChange = { viewModel.onPasswordChange(it) },
-            enabled = true,
+            enabled = !isLoading,
             error = !password.isValid,
             leadingIcon = Icons.Flux.Key
         )
@@ -108,7 +118,7 @@ private fun CreateAccountContent(viewModel: CreateAccountViewModel) {
             modifier = Modifier.fillMaxWidth().padding(top = Spacing.Medium),
             value = passwordConfirmation.value,
             onValueChange = { viewModel.onPasswordConfirmationChange(it) },
-            enabled = true,
+            enabled = !isLoading,
             error = !passwordConfirmation.isValid,
             leadingIcon = Icons.Flux.Key
         )
@@ -116,7 +126,10 @@ private fun CreateAccountContent(viewModel: CreateAccountViewModel) {
 
         Spacer(modifier = Modifier.height(Spacing.Small))
 
-        Button(enabled = isReadyToSubmit(email, password), onClick = { viewModel.submit() }) {
+        Button(
+            enabled = isReadyToSubmit(isLoading, email, password),
+            onClick = { viewModel.submit() },
+        ) {
             Text("CREATE ACCOUNT")
         }
     }

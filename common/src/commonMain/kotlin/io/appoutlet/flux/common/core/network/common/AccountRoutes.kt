@@ -6,7 +6,12 @@ object AccountRoutes {
     fun signInWithPassword() = "$baseUrl:signInWithPassword"
 
     fun signUp() = "$baseUrl:signUp"
+
+    fun updateProfile() = "$baseUrl:update"
+
+    fun sendEmailConfirmation() = "$baseUrl:sendOobCode"
 }
 
+@Suppress("unused")
 val Route.Accounts
     get() = AccountRoutes

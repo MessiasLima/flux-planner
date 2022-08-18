@@ -32,6 +32,26 @@ class AuthenticationApi(
         return httpResponse.getResult()
     }
 
+    suspend fun updateProfile(updateProfileRequest: UpdateProfileRequest): UpdateProfileResponse {
+        val httpResponse = httpClient.post(urlString = Route.Accounts.updateProfile()) {
+            setupRequest()
+            setBody(updateProfileRequest)
+        }
+
+        return httpResponse.getResult()
+    }
+
+    suspend fun sendEmailConfirmation(
+        sendEmailConfirmationRequest: SendEmailConfirmationRequest,
+    ): SendEmailConfirmationResponse {
+        val httpResponse = httpClient.post(urlString = Route.Accounts.sendEmailConfirmation()) {
+            setupRequest()
+            setBody(sendEmailConfirmationRequest)
+        }
+
+        return httpResponse.getResult()
+    }
+
     private fun HttpRequestBuilder.setupRequest() {
         parameter("key", SIGN_IN_API_KEY)
         contentType(ContentType.Application.Json)

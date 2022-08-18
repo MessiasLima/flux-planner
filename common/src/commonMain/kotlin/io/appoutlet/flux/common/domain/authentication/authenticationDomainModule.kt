@@ -4,5 +4,7 @@ import org.koin.dsl.module
 
 val authenticationDomainModule = module {
     factory { AuthenticationRequestMapper() }
-    factory { AuthenticationInteractor(get(), get(), get()) }
+    factory { UpdateProfileRequestMapper() }
+    factory { SendEmailConfirmationRequestMapper() }
+    factory { AuthenticationInteractor(get(), get(), get(), get(), get()) }
 }

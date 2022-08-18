@@ -70,7 +70,10 @@ class CreateAccountViewModel(
             password = password.value.value
         )
             .onStart { mutableUiState.value = CreateAccountUiState.Loading }
-            .catch { mutableUiState.value = CreateAccountUiState.Error }
+            .catch {
+                it.printStackTrace()
+                mutableUiState.value = CreateAccountUiState.Error
+            }
             .onEach { mutableUiState.value = CreateAccountUiState.Success }
             .launchIn(viewModelScope)
     }
@@ -85,7 +88,7 @@ data class InputValue(
     }
 }
 
-sealed class CreateAccountUiState{
+sealed class CreateAccountUiState {
     object Idle : CreateAccountUiState()
     object Loading : CreateAccountUiState()
     object Error : CreateAccountUiState()
