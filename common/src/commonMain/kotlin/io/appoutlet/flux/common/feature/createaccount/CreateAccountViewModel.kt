@@ -42,7 +42,7 @@ class CreateAccountViewModel(
 
         mutablePassword.value = InputValue(
             value = password,
-            isValid = passwordsAreEqual
+            isValid = passwordsAreEqual && passwordIsComplexEnough(password)
         )
 
         mutablePasswordConfirmation.value = mutablePasswordConfirmation.value.copy(
@@ -55,12 +55,16 @@ class CreateAccountViewModel(
 
         mutablePasswordConfirmation.value = InputValue(
             value = passwordConfirmation,
-            isValid = passwordsAreEqual
+            isValid = passwordsAreEqual && passwordIsComplexEnough(passwordConfirmation)
         )
 
         mutablePassword.value = mutablePassword.value.copy(
             isValid = passwordsAreEqual,
         )
+    }
+
+    private fun passwordIsComplexEnough(newPassword: String): Boolean {
+        return newPassword.length > 6
     }
 
     fun submit() {
