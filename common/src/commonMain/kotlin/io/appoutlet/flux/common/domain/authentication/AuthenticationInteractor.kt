@@ -15,4 +15,9 @@ class AuthenticationInteractor(
         val userDomain = userDomainMapper.map(authenticationResponse)
         emit(userDomain)
     }
+
+    fun createUser(email: String, password: String) = flow {
+        val authenticationRequest = authenticationRequestMapper.map(email, password)
+        val createAccountResponse = authenticationApi.createAccount(authenticationRequest)
+    }
 }

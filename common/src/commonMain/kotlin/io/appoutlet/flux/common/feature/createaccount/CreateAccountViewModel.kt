@@ -3,11 +3,20 @@ package io.appoutlet.flux.common.feature.createaccount
 import io.appoutlet.flux.common.feature.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 
 @Suppress("RegExpRedundantEscape")
 private val REGEX_EMAIL = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$".toRegex()
 
-class CreateAccountViewModel : BaseViewModel() {
+class CreateAccountViewModel(
+    private val createAccountOrchestrator: CreateAccountOrchestrator
+) : BaseViewModel() {
+    private val mutableUiState = MutableStateFlow<CreateAccountUiState>(CreateAccountUiState.Idle)
+    val uiState = mutableUiState.asStateFlow()
+
     private val mutableName = MutableStateFlow(InputValue.EMPTY)
     val name = mutableName.asStateFlow()
 
@@ -55,6 +64,15 @@ class CreateAccountViewModel : BaseViewModel() {
     }
 
     fun submit() {
+        createAccountOrchestrator.createAccount(
+            name = name.value.value,
+            email = email.value.value,
+            password = password.value.value
+        )
+            .onStart { mutableUiState.value = CreateAccountUiState.Loading }
+            .catch { mutableUiState.value = CreateAccountUiState.Error }
+            .onEach { mutableUiState.value = CreateAccountUiState.Success }
+            .launchIn(viewModelScope)
     }
 }
 
@@ -65,4 +83,11 @@ data class InputValue(
     companion object {
         val EMPTY = InputValue(value = "", isValid = true)
     }
+}
+
+sealed class CreateAccountUiState{
+    object Idle : CreateAccountUiState()
+    object Loading : CreateAccountUiState()
+    object Error : CreateAccountUiState()
+    object Success : CreateAccountUiState()
 }
