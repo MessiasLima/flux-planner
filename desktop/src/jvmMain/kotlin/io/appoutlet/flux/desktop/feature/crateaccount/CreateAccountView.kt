@@ -43,7 +43,7 @@ fun CreateAccountView(karavel: Karavel?, viewModel: CreateAccountViewModel) {
 
         TopBar(onBackClicked = { karavel?.back() })
 
-        CreateAccountContent(viewModel = viewModel, isLoading = isLoading)
+        CreateAccountContent(viewModel = viewModel, uiState = uiState)
 
         Spacer(modifier = Modifier.height(Spacing.Medium))
     }
@@ -51,8 +51,8 @@ fun CreateAccountView(karavel: Karavel?, viewModel: CreateAccountViewModel) {
 
 private fun isReadyToSubmit(isLoading: Boolean, email: InputValue, password: InputValue): Boolean {
     return (!isLoading) &&
-        email.value.isNotBlank() && email.isValid &&
-        password.value.isNotBlank() && password.isValid
+            email.value.isNotBlank() && email.isValid &&
+            password.value.isNotBlank() && password.isValid
 }
 
 @Composable
@@ -73,7 +73,10 @@ private fun TopBar(onBackClicked: () -> Unit) {
 }
 
 @Composable
-private fun CreateAccountContent(viewModel: CreateAccountViewModel, isLoading: Boolean) {
+private fun CreateAccountContent(viewModel: CreateAccountViewModel, uiState: CreateAccountUiState) {
+    val isLoading = uiState is CreateAccountUiState.Loading
+    val isError = uiState is CreateAccountUiState.Error
+
     Column(
         modifier = Modifier.padding(horizontal = Spacing.Medium),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -122,7 +125,16 @@ private fun CreateAccountContent(viewModel: CreateAccountViewModel, isLoading: B
             error = !passwordConfirmation.isValid,
             leadingIcon = Icons.Flux.Key
         )
-        TextFieldErrorMessage(!passwordConfirmation.isValid, "The passwords are not equal")
+
+        val errorMessage = if (passwordConfirmation.isValid) {
+            "Error when creating your account"
+        } else {
+            "The passwords are not equal"
+        }
+        TextFieldErrorMessage(
+            show = (!passwordConfirmation.isValid) || isError,
+            message = errorMessage,
+        )
 
         Spacer(modifier = Modifier.height(Spacing.Small))
 
