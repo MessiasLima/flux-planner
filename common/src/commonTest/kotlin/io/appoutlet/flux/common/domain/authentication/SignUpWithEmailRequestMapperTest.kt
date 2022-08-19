@@ -4,7 +4,7 @@ import io.appoutlet.flux.common.test.UnitTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-internal class SignUpWithEmailRequestMapperTest : UnitTest<SignUpWithEmailRequestMapper>(){
+internal class SignUpWithEmailRequestMapperTest : UnitTest<SignUpWithEmailRequestMapper>() {
     override fun buildSut() = SignUpWithEmailRequestMapper()
 
     @Test

@@ -40,7 +40,7 @@ class UserDomainMapperTest : UnitTest<UserDomainMapper>() {
     }
 
     @Test
-    fun `should map from SignUpWithEmailResponse`(){
+    fun `should map from SignUpWithEmailResponse`() {
         val fixtSignUpWithEmailResponse: SignUpWithEmailResponse = fixture()
 
         val actual = sut.map(fixtSignUpWithEmailResponse)

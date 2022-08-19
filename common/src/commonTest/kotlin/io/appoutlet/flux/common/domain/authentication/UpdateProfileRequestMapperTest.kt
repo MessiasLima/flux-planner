@@ -5,7 +5,7 @@ import io.appoutlet.flux.common.test.UnitTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-internal class UpdateProfileRequestMapperTest : UnitTest<UpdateProfileRequestMapper>(){
+internal class UpdateProfileRequestMapperTest : UnitTest<UpdateProfileRequestMapper>() {
     override fun buildSut() = UpdateProfileRequestMapper()
 
     @Test

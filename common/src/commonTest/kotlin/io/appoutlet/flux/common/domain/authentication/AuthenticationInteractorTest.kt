@@ -84,7 +84,9 @@ class AuthenticationInteractorTest : UnitTest<AuthenticationInteractor>() {
             )
         } returns fixtSignUpWithEmailRequest
 
-        coEvery { mockAuthenticationApi.signUpWithEmail(fixtSignUpWithEmailRequest) } returns fixtSignUpWithEmailResponse
+        coEvery {
+            mockAuthenticationApi.signUpWithEmail(fixtSignUpWithEmailRequest)
+        } returns fixtSignUpWithEmailResponse
 
         every { mockUserDomainMapper.map(fixtSignUpWithEmailResponse) } returns fixtUserDomain
 
@@ -120,8 +122,13 @@ class AuthenticationInteractorTest : UnitTest<AuthenticationInteractor>() {
         val fixtSendEmailConfirmationRequest: SendEmailConfirmationRequest = fixture()
         val fixtSendEmailConfirmationResponse: SendEmailConfirmationResponse = fixture()
 
-        every { mockSendEmailConfirmationRequestMapper.map(fixtUserDomain) } returns fixtSendEmailConfirmationRequest
-        coEvery { mockAuthenticationApi.sendEmailConfirmation(fixtSendEmailConfirmationRequest) } returns fixtSendEmailConfirmationResponse
+        every {
+            mockSendEmailConfirmationRequestMapper.map(fixtUserDomain)
+        } returns fixtSendEmailConfirmationRequest
+
+        coEvery {
+            mockAuthenticationApi.sendEmailConfirmation(fixtSendEmailConfirmationRequest)
+        } returns fixtSendEmailConfirmationResponse
 
         sut.sendEmailConfirmation(fixtUserDomain)
 
