@@ -1,5 +1,6 @@
 package io.appoutlet.flux.desktop.feature.signin
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,27 +34,33 @@ import io.appoutlet.flux.desktop.common.initialize
 import io.appoutlet.flux.desktop.di.koin
 import io.appoutlet.flux.desktop.feature.crateaccount.CreateAccountPage
 import io.appoutlet.flux.desktop.feature.passwordrecovery.PasswordRecoveryPage
+import io.appoutlet.flux.desktop.feature.splash.SplashPage
 import io.appoutlet.karavel.Karavel
+import kotlinx.coroutines.FlowPreview
 
+@ExperimentalFoundationApi
+@FlowPreview
 @Composable
 fun SignInView(
     karavel: Karavel?,
+    mainKaravel: Karavel?,
     viewModel: SignInViewModel = koin.get(),
-    onLoginSuccessful: () -> Unit,
 ) {
     viewModel.initialize()
-    SignInForm(viewModel, karavel, onLoginSuccessful)
+    SignInForm(viewModel, karavel, mainKaravel)
 }
 
+@ExperimentalFoundationApi
+@FlowPreview
 @Composable
-private fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuccessful: () -> Unit) {
+private fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, mainKaravel: Karavel?) {
     Box {
         val uiState: SignInUiState by viewModel.uiState.collectAsState(initial = SignInUiState.Idle)
         val isLoading = uiState is SignInUiState.Loading
         val isError = uiState is SignInUiState.Error
 
         if (isLoading) LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-        if (uiState is SignInUiState.Success) onLoginSuccessful()
+        if (uiState is SignInUiState.Success) mainKaravel?.navigate(SplashPage())
 
         Column(
             modifier = Modifier.padding(Spacing.Medium),
@@ -105,7 +112,10 @@ private fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, onLoginSuc
 
             Spacer(modifier = Modifier.height(Spacing.Small))
 
-            TextButton(enabled = !isLoading, onClick = { karavel?.navigate(CreateAccountPage()) }) {
+            TextButton(
+                enabled = !isLoading,
+                onClick = { karavel?.navigate(CreateAccountPage(mainKaravel)) },
+            ) {
                 Text("Create account")
             }
 

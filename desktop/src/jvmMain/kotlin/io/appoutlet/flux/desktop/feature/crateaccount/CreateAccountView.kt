@@ -35,10 +35,15 @@ import kotlinx.coroutines.FlowPreview
 
 @FlowPreview
 @Composable
-fun CreateAccountView(karavel: Karavel?, viewModel: CreateAccountViewModel) {
+fun CreateAccountView(karavel: Karavel?, viewModel: CreateAccountViewModel, onSuccess: () -> Unit) {
     viewModel.initialize()
     val uiState by viewModel.uiState.collectAsState()
     val isLoading = uiState is CreateAccountUiState.Loading
+    val isSuccess = uiState is CreateAccountUiState.Success
+
+    if (isSuccess) {
+        onSuccess()
+    }
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         FluxProgressBar(isLoading = isLoading)
