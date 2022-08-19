@@ -1,5 +1,7 @@
 package io.appoutlet.flux.common.core.network.authentication
 
+import io.appoutlet.flux.common.core.network.common.Accounts
+import io.appoutlet.flux.common.core.network.common.Route
 import io.appoutlet.flux.common.test.UnitTest
 import io.appoutlet.flux.common.test.api.ApiTest
 import io.appoutlet.flux.common.test.api.ApiTestImpl
@@ -18,18 +20,18 @@ class AuthenticationApiTest : UnitTest<AuthenticationApi>(), ApiTest by ApiTestI
     override fun buildSut() = AuthenticationApi(mockHttpClient)
 
     @Test
-    fun `should authenticate`() = runTest {
+    fun `should sign in with password`() = runTest {
         val fixtAuthenticationRequest: AuthenticationRequest = fixture()
         val fixtAuthenticationResponse: AuthenticationResponse = fixture()
 
-        setResponseResolver(AuthenticationApi.SIGN_IN_END_POINT + "?key=" + AuthenticationApi.SIGN_IN_API_KEY) {
+        setResponseResolver(Route.Accounts.signInWithPassword() + "?key=" + AuthenticationApi.SIGN_IN_API_KEY) {
             respond(
                 content = Json.encodeToString(fixtAuthenticationResponse),
                 headers = headersOf(HttpHeaders.ContentType, "application/json")
             )
         }
 
-        val actual = sut.authenticate(fixtAuthenticationRequest)
+        val actual = sut.signInWithPassword(fixtAuthenticationRequest)
 
         assertEquals(fixtAuthenticationResponse, actual)
     }

@@ -24,7 +24,13 @@ class ApiTestImpl : ApiTest {
     override val mockEngine = MockEngine { request ->
         respond("")
         val responseResolver = responseData[request.url.toString()]
-            ?: throw InvalidParameterException("No response found for the given url: $request")
+
+        if (responseResolver == null) {
+            val message = "No response found for the given url: $request"
+            println(message)
+            throw InvalidParameterException(message)
+        }
+
         responseResolver(request)
     }
 

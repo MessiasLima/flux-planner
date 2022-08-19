@@ -20,11 +20,17 @@ class AuthenticationInteractorTest : UnitTest<AuthenticationInteractor>() {
     private val mockAuthenticationApi: AuthenticationApi = mockk()
     private val mockAuthenticationRequestMapper: AuthenticationRequestMapper = mockk()
     private val mockUserDomainMapper: UserDomainMapper = mockk()
+    private val mockUpdateProfileRequestMapper: UpdateProfileRequestMapper = mockk()
+    private val mockSendEmailConfirmationRequestMapper: SendEmailConfirmationRequestMapper = mockk()
+    private val mockSignUpWithEmailRequestMapper: SignUpWithEmailRequestMapper = mockk()
 
     override fun buildSut() = AuthenticationInteractor(
         authenticationApi = mockAuthenticationApi,
         authenticationRequestMapper = mockAuthenticationRequestMapper,
         userDomainMapper = mockUserDomainMapper,
+        updateProfileRequestMapper = mockUpdateProfileRequestMapper,
+        sendEmailConfirmationRequestMapper = mockSendEmailConfirmationRequestMapper,
+        sighUpWithEmailRequestMapper = mockSignUpWithEmailRequestMapper,
     )
 
     @Test
@@ -43,7 +49,7 @@ class AuthenticationInteractorTest : UnitTest<AuthenticationInteractor>() {
         } returns fixtAuthenticationRequest
 
         coEvery {
-            mockAuthenticationApi.authenticate(authenticationRequest = fixtAuthenticationRequest)
+            mockAuthenticationApi.signInWithPassword(authenticationRequest = fixtAuthenticationRequest)
         } returns fixtAuthenticationResponse
 
         every { mockUserDomainMapper.map(fixtAuthenticationResponse) } returns fixtUserDomain

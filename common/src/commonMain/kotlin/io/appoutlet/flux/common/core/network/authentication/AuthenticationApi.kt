@@ -11,10 +11,8 @@ import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 
-class AuthenticationApi(
-    private val httpClient: HttpClient
-) {
-    suspend fun authenticate(authenticationRequest: AuthenticationRequest): AuthenticationResponse {
+class AuthenticationApi(private val httpClient: HttpClient) {
+    suspend fun signInWithPassword(authenticationRequest: AuthenticationRequest): AuthenticationResponse {
         val httpResponse = httpClient.post(urlString = Route.Accounts.signInWithPassword()) {
             setupRequest()
             setBody(authenticationRequest)
