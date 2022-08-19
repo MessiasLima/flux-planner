@@ -58,8 +58,8 @@ fun CreateAccountView(karavel: Karavel?, viewModel: CreateAccountViewModel, onSu
 
 private fun isReadyToSubmit(isLoading: Boolean, email: InputValue, password: InputValue): Boolean {
     return (!isLoading) &&
-            email.value.isNotBlank() && email.isValid &&
-            password.value.isNotBlank() && password.isValid
+        email.value.isNotBlank() && email.isValid &&
+        password.value.isNotBlank() && password.isValid
 }
 
 @Composable
@@ -149,8 +149,6 @@ private fun CreateAccountContent(viewModel: CreateAccountViewModel, uiState: Cre
         Button(
             enabled = isReadyToSubmit(isLoading, email, password),
             onClick = { viewModel.submit() },
-        ) {
-            Text("CREATE ACCOUNT")
-        }
+        ) { Text("CREATE ACCOUNT") }
     }
 }

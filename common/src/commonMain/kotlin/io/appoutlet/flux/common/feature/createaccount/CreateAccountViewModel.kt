@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.onStart
 
 @Suppress("RegExpRedundantEscape")
 private val REGEX_EMAIL = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$".toRegex()
-private val MIN_PASSWORD_LENGHT = 6
+private const val MIN_PASSWORD_LENGTH = 6
 
 @FlowPreview
 class CreateAccountViewModel(
@@ -67,7 +67,7 @@ class CreateAccountViewModel(
     }
 
     private fun passwordIsComplexEnough(newPassword: String): Boolean {
-        return newPassword.length > MIN_PASSWORD_LENGHT
+        return newPassword.length > MIN_PASSWORD_LENGTH
     }
 
     fun submit() {
