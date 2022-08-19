@@ -40,7 +40,7 @@ class ApiTestImpl : ApiTest {
         }
     }
 
-    override fun setResponseResolver(url: String, response: ResponseResolver) {
+    override fun addResponseResolver(url: String, response: ResponseResolver) {
         responseData[url] = response
     }
 }

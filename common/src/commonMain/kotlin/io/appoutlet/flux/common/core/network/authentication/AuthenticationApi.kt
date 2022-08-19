@@ -21,10 +21,10 @@ class AuthenticationApi(private val httpClient: HttpClient) {
         return httpResponse.getResult()
     }
 
-    suspend fun signUpWithEmail(authenticationRequest: SignUpWithEmailRequest): SignUpWithEmailResponse {
+    suspend fun signUpWithEmail(signUpWithEmailRequest: SignUpWithEmailRequest): SignUpWithEmailResponse {
         val httpResponse = httpClient.post(urlString = Route.Accounts.signUp()) {
             setupRequest()
-            setBody(authenticationRequest)
+            setBody(signUpWithEmailRequest)
         }
 
         return httpResponse.getResult()
