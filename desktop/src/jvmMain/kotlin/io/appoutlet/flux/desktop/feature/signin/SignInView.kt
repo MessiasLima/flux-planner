@@ -115,16 +115,12 @@ private fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, mainKarave
             TextButton(
                 enabled = !isLoading,
                 onClick = { karavel?.navigate(CreateAccountPage(mainKaravel)) },
-            ) {
-                Text("Create account")
-            }
+            ) { Text("Create account") }
 
             TextButton(
                 enabled = !isLoading,
                 onClick = { karavel?.navigate(PasswordRecoveryPage()) },
-            ) {
-                Text("Forgot password")
-            }
+            ) { Text("Forgot password") }
         }
     }
 }

@@ -134,15 +134,7 @@ private fun CreateAccountContent(viewModel: CreateAccountViewModel, uiState: Cre
             leadingIcon = Icons.Flux.Key
         )
 
-        val errorMessage = if (passwordConfirmation.isValid) {
-            "Error when creating your account"
-        } else {
-            "The passwords are not equal"
-        }
-        TextFieldErrorMessage(
-            show = (!passwordConfirmation.isValid) || isError,
-            message = errorMessage,
-        )
+        MainErrorMessage(passwordIsValid = passwordConfirmation.isValid, isError = isError)
 
         Spacer(modifier = Modifier.height(Spacing.Small))
 
@@ -151,4 +143,17 @@ private fun CreateAccountContent(viewModel: CreateAccountViewModel, uiState: Cre
             onClick = { viewModel.submit() },
         ) { Text("CREATE ACCOUNT") }
     }
+}
+
+@Composable
+private fun MainErrorMessage(passwordIsValid: Boolean, isError: Boolean) {
+    val errorMessage = if (passwordIsValid) {
+        "Error when creating your account"
+    } else {
+        "The passwords are not equal"
+    }
+    TextFieldErrorMessage(
+        show = (!passwordIsValid) || isError,
+        message = errorMessage,
+    )
 }
