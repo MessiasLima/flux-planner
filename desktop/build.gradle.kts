@@ -94,7 +94,7 @@ kover {
             target = kotlinx.kover.api.VerificationTarget.ALL
 
             bound {
-                minValue = 13
+                minValue = 28
                 counter = kotlinx.kover.api.CounterType.LINE
                 valueType = kotlinx.kover.api.VerificationValueType.COVERED_PERCENTAGE
             }
