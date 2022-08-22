@@ -2,19 +2,16 @@ package io.appoutlet.flux.desktop.common.components
 
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
-import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import io.appoutlet.flux.desktop.common.FluxIcons
 import io.appoutlet.flux.desktop.common.Mail
+import io.appoutlet.flux.desktop.testingutils.UiTest
 import io.appoutlet.flux.desktop.testingutils.hasError
-import org.junit.Rule
 import org.junit.Test
 
-class DefaultTextFieldKtTest {
-    @get:Rule
-    val composeTestRule = createComposeRule()
+class DefaultTextFieldKtTest : UiTest() {
 
     @Test
     fun `should show value`() {
