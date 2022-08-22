@@ -8,7 +8,7 @@ import io.appoutlet.flux.desktop.testingutils.assertIsVisibleToUser
 import org.junit.Test
 
 @ExperimentalComposeUiApi
-class TextFieldErrorMessageTest : UiTest(){
+class TextFieldErrorMessageTest : UiTest() {
     @Test
     fun `should show error message`() {
         val message = "My error message"

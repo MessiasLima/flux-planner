@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import io.appoutlet.flux.common.core.ui.Spacing
 import io.appoutlet.flux.common.feature.createaccount.CreateAccountUiState
@@ -33,6 +34,7 @@ import io.appoutlet.flux.desktop.common.initialize
 import io.appoutlet.karavel.Karavel
 import kotlinx.coroutines.FlowPreview
 
+@ExperimentalComposeUiApi
 @FlowPreview
 @Composable
 fun CreateAccountView(karavel: Karavel?, viewModel: CreateAccountViewModel, onSuccess: () -> Unit) {
@@ -79,6 +81,7 @@ private fun TopBar(onBackClicked: () -> Unit) {
     )
 }
 
+@ExperimentalComposeUiApi
 @FlowPreview
 @Composable
 private fun CreateAccountContent(viewModel: CreateAccountViewModel, uiState: CreateAccountUiState) {
@@ -145,6 +148,7 @@ private fun CreateAccountContent(viewModel: CreateAccountViewModel, uiState: Cre
     }
 }
 
+@ExperimentalComposeUiApi
 @Composable
 private fun MainErrorMessage(passwordIsValid: Boolean, isError: Boolean) {
     val errorMessage = if (passwordIsValid) {

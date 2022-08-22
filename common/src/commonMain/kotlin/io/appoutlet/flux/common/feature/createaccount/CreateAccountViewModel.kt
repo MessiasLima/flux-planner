@@ -42,27 +42,29 @@ class CreateAccountViewModel(
 
     fun onPasswordChange(password: String) {
         val passwordsAreEqual = password == passwordConfirmation.value.value
+        val validPasses = passwordsAreEqual && passwordIsComplexEnough(password)
 
         mutablePassword.value = InputValue(
             value = password,
-            isValid = passwordsAreEqual && passwordIsComplexEnough(password)
+            isValid = validPasses
         )
 
         mutablePasswordConfirmation.value = mutablePasswordConfirmation.value.copy(
-            isValid = passwordsAreEqual,
+            isValid = validPasses,
         )
     }
 
     fun onPasswordConfirmationChange(passwordConfirmation: String) {
         val passwordsAreEqual = passwordConfirmation == password.value.value
+        val validPasses = passwordsAreEqual && passwordIsComplexEnough(passwordConfirmation)
 
         mutablePasswordConfirmation.value = InputValue(
             value = passwordConfirmation,
-            isValid = passwordsAreEqual && passwordIsComplexEnough(passwordConfirmation)
+            isValid = validPasses
         )
 
         mutablePassword.value = mutablePassword.value.copy(
-            isValid = passwordsAreEqual,
+            isValid = validPasses,
         )
     }
 
