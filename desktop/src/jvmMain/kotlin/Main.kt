@@ -1,6 +1,7 @@
 @file:JvmName("Flux")
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import io.appoutlet.flux.common.core.ui.FluxTheme
@@ -14,6 +15,7 @@ import java.awt.Dimension
 private const val WINDOW_MIN_WIDTH = 800
 private const val WINDOW_MIN_HEIGHT = 700
 
+@ExperimentalComposeUiApi
 @FlowPreview
 @ExperimentalFoundationApi
 fun main() {

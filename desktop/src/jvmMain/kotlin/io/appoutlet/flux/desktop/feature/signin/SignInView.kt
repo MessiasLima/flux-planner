@@ -21,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.appoutlet.flux.common.core.ui.Spacing
@@ -38,6 +39,7 @@ import io.appoutlet.flux.desktop.feature.splash.SplashPage
 import io.appoutlet.karavel.Karavel
 import kotlinx.coroutines.FlowPreview
 
+@ExperimentalComposeUiApi
 @ExperimentalFoundationApi
 @FlowPreview
 @Composable
@@ -50,6 +52,7 @@ fun SignInView(
     SignInForm(viewModel, karavel, mainKaravel)
 }
 
+@ExperimentalComposeUiApi
 @ExperimentalFoundationApi
 @FlowPreview
 @Composable

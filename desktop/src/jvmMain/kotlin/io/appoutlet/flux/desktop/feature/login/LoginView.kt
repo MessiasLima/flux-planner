@@ -12,12 +12,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.appoutlet.flux.common.core.ui.shapeMedium
 import io.appoutlet.flux.desktop.feature.signin.SignInPage
 import io.appoutlet.karavel.Karavel
+import kotlinx.coroutines.FlowPreview
 
+@FlowPreview
+@ExperimentalComposeUiApi
 @ExperimentalFoundationApi
 @Composable
 fun LoginView(mainKaravel: Karavel?) {
