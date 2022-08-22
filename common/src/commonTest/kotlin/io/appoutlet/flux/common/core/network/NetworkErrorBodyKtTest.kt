@@ -21,7 +21,7 @@ class NetworkErrorBodyKtTest : UnitTest<Unit>(), ApiTest by ApiTestImpl() {
         val fixtUrl: String = "http://" + fixture()
         val fixtSampleResponse: SampleResponse = fixture()
 
-        setResponseResolver(fixtUrl) {
+        addResponseResolver(fixtUrl) {
             respond(content = fixtSampleResponse)
         }
 
@@ -35,7 +35,7 @@ class NetworkErrorBodyKtTest : UnitTest<Unit>(), ApiTest by ApiTestImpl() {
         val fixtUrl: String = "http://" + fixture()
         val fixtFluxNetworkErrorBody: FluxNetworkErrorBody = fixture()
 
-        setResponseResolver(fixtUrl) {
+        addResponseResolver(fixtUrl) {
             respond(content = fixtFluxNetworkErrorBody, status = HttpStatusCode.InternalServerError)
         }
 

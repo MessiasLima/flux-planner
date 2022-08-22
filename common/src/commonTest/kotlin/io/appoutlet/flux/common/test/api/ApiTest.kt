@@ -7,5 +7,5 @@ interface ApiTest {
     val mockEngine: MockEngine
     val mockHttpClient: HttpClient
 
-    fun setResponseResolver(url: String, response: ResponseResolver)
+    fun addResponseResolver(url: String, response: ResponseResolver)
 }

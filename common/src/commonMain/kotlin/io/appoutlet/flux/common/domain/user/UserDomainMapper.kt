@@ -2,6 +2,7 @@ package io.appoutlet.flux.common.domain.user
 
 import io.appoutlet.flux.common.core.database.generated.UserEntity
 import io.appoutlet.flux.common.core.network.authentication.AuthenticationResponse
+import io.appoutlet.flux.common.core.network.authentication.SignUpWithEmailResponse
 import io.appoutlet.flux.common.util.toBoolean
 
 class UserDomainMapper {
@@ -21,5 +22,14 @@ class UserDomainMapper {
         idToken = userEntity.idToken,
         refreshToken = userEntity.refreshToken,
         registered = userEntity.registered.toBoolean(),
+    )
+
+    fun map(createAccountResponse: SignUpWithEmailResponse) = UserDomain(
+        idToken = createAccountResponse.idToken,
+        email = createAccountResponse.email,
+        refreshToken = createAccountResponse.refreshToken,
+        id = createAccountResponse.localId,
+        displayName = "",
+        registered = false
     )
 }

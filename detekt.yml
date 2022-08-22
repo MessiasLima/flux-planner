@@ -10,3 +10,7 @@ style:
 performance:
   SpreadOperator:
     active: false
+complexity:
+  LongParameterList:
+    ignoreAnnotated:
+      - 'Composable'
