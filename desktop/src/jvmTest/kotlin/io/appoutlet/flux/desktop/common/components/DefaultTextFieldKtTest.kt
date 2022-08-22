@@ -1,4 +1,4 @@
-package io.appoutlet.flux.desktop.feature.signin.component
+package io.appoutlet.flux.desktop.common.components
 
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
@@ -6,11 +6,13 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import io.appoutlet.flux.desktop.common.components.DefaultTextField
+import io.appoutlet.flux.desktop.common.FluxIcons
+import io.appoutlet.flux.desktop.common.Mail
+import io.appoutlet.flux.desktop.testingutils.hasError
 import org.junit.Rule
 import org.junit.Test
 
-class EmailTextFieldKtTest {
+class DefaultTextFieldKtTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -53,5 +55,31 @@ class EmailTextFieldKtTest {
         composeTestRule.onNodeWithText("")
             .assertExists()
             .assertIsNotEnabled()
+    }
+
+    @Test
+    fun `should show error`() {
+        composeTestRule.setContent {
+            DefaultTextField(value = "", onValueChange = {}, enabled = true, error = true)
+        }
+
+        composeTestRule.onNode(hasError("Invalid input"))
+            .assertExists()
+    }
+
+    @Test
+    fun `should show leading icon`() {
+        composeTestRule.setContent {
+            DefaultTextField(
+                value = "",
+                onValueChange = {},
+                enabled = true,
+                error = false,
+                leadingIcon = FluxIcons.Mail
+            )
+        }
+
+        composeTestRule.onNodeWithContentDescription("Leading icon")
+            .assertExists()
     }
 }
