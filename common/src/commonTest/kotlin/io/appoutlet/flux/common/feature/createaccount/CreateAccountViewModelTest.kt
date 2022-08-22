@@ -1,9 +1,15 @@
 package io.appoutlet.flux.common.feature.createaccount
 
+import io.appoutlet.flux.common.domain.user.UserDomain
 import io.appoutlet.flux.common.test.UnitTest
+import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.test.advanceTimeBy
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -109,5 +115,81 @@ internal class CreateAccountViewModelTest : UnitTest<CreateAccountViewModel>() {
 
         assertEquals(fixtPasswordConfirmation, sut.passwordConfirmation.value.value)
         assertFalse(sut.passwordConfirmation.value.isValid)
+    }
+
+    @Test
+    fun `should create account`() = runTest {
+        sut.init(this)
+
+        val fixtName: String = fixture()
+        val fixtPassword: String = fixture()
+        val fixtEmail = "someemail@domain.com"
+        val fixtUserDomain: UserDomain = fixture()
+
+        every {
+            mockCreateAccountOrchestrator.createAccount(
+                name = fixtName,
+                email = fixtEmail,
+                password = fixtPassword
+            )
+        } returns flow {
+            delay(2)
+            emit(fixtUserDomain)
+        }
+
+        sut.onNameChange(fixtName)
+        sut.onEmailChange(fixtEmail)
+        sut.onPasswordChange(fixtPassword)
+        sut.onPasswordConfirmationChange(fixtPassword)
+
+        assertEquals(CreateAccountUiState.Idle, sut.uiState.value)
+
+        sut.submit()
+
+        advanceTimeBy(1)
+
+        assertEquals(CreateAccountUiState.Loading, sut.uiState.value)
+
+        advanceUntilIdle()
+
+        assertEquals(CreateAccountUiState.Success, sut.uiState.value)
+    }
+
+    @Suppress("TooGenericExceptionThrown")
+    @Test
+    fun `should return error state when create account fails`() = runTest {
+        sut.init(this)
+
+        val fixtName: String = fixture()
+        val fixtPassword: String = fixture()
+        val fixtEmail = "someemail@domain.com"
+
+        every {
+            mockCreateAccountOrchestrator.createAccount(
+                name = fixtName,
+                email = fixtEmail,
+                password = fixtPassword
+            )
+        } returns flow {
+            delay(2)
+            throw RuntimeException("fail for testing")
+        }
+
+        sut.onNameChange(fixtName)
+        sut.onEmailChange(fixtEmail)
+        sut.onPasswordChange(fixtPassword)
+        sut.onPasswordConfirmationChange(fixtPassword)
+
+        assertEquals(CreateAccountUiState.Idle, sut.uiState.value)
+
+        sut.submit()
+
+        advanceTimeBy(1)
+
+        assertEquals(CreateAccountUiState.Loading, sut.uiState.value)
+
+        advanceUntilIdle()
+
+        assertEquals(CreateAccountUiState.Error, sut.uiState.value)
     }
 }
