@@ -10,6 +10,8 @@ object AccountRoutes {
     fun updateProfile() = "$baseUrl:update"
 
     fun sendEmailConfirmation() = "$baseUrl:sendOobCode"
+
+    fun lookUp() = "$baseUrl:lookup"
 }
 
 @Suppress("unused")

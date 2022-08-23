@@ -7,7 +7,7 @@ class SplashUiStateMapper {
     fun map(user: UserDomain) = if (user.registered) {
         SplashUiState.Logged
     } else {
-        SplashUiState.EmailNotValidated
+        SplashUiState.EmailNotVerified
     }
 
     fun map(throwable: Throwable) = when (throwable) {

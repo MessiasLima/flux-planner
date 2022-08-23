@@ -7,5 +7,6 @@ val authenticationDomainModule = module {
     factory { UpdateProfileRequestMapper() }
     factory { SendEmailConfirmationRequestMapper() }
     factory { SignUpWithEmailRequestMapper() }
-    factory { AuthenticationInteractor(get(), get(), get(), get(), get(), get()) }
+    factory { LookUpRequestMapper() }
+    factory { AuthenticationInteractor(get(), get(), get(), get(), get(), get(), get()) }
 }

@@ -29,7 +29,7 @@ class SplashViewModel(
 sealed class SplashUiState {
     object Loading : SplashUiState()
     object Logged : SplashUiState()
-    object EmailNotValidated : SplashUiState()
+    object EmailNotVerified : SplashUiState()
     object NotLogged : SplashUiState()
     object Error : SplashUiState()
 }

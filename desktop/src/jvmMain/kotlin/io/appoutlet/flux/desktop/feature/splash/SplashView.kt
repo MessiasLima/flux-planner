@@ -26,6 +26,7 @@ import io.appoutlet.flux.desktop.common.components.FluxProgressBar
 import io.appoutlet.flux.desktop.common.components.TextFieldErrorMessage
 import io.appoutlet.flux.desktop.common.initialize
 import io.appoutlet.flux.desktop.di.koin
+import io.appoutlet.flux.desktop.feature.emailverification.EmailVerificationPage
 import io.appoutlet.flux.desktop.feature.login.LoginPage
 import io.appoutlet.flux.desktop.feature.notes.NotesPage
 import io.appoutlet.karavel.Karavel
@@ -79,7 +80,7 @@ fun verifyUiStateAndNavigate(uiState: SplashUiState, karavel: Karavel?) {
     when (uiState) {
         SplashUiState.Logged -> karavel?.navigate(NotesPage())
         SplashUiState.NotLogged -> karavel?.navigate(LoginPage())
-        SplashUiState.EmailNotValidated -> TODO()
+        SplashUiState.EmailNotVerified -> karavel?.navigate(EmailVerificationPage())
         else -> {
             /*no-op*/
         }
