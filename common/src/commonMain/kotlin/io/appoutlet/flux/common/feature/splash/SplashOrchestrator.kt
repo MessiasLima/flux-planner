@@ -40,4 +40,8 @@ class SplashOrchestrator(
             throw exception
         }
     }
+
+    fun logOut() {
+        userInteractor.deleteAll()
+    }
 }

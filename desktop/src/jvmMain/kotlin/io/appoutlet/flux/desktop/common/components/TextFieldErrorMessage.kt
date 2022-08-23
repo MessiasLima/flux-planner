@@ -1,7 +1,6 @@
 package io.appoutlet.flux.desktop.common.components
 
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -16,11 +15,11 @@ import androidx.compose.ui.unit.dp
 
 @ExperimentalComposeUiApi
 @Composable
-fun TextFieldErrorMessage(show: Boolean, message: String) {
+fun TextFieldErrorMessage(modifier: Modifier = Modifier, show: Boolean, message: String) {
     val alpha by animateFloatAsState(if (show) 1f else 0f)
 
     Text(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier
             .padding(start = 16.dp)
             .alpha(alpha)
             .semantics {

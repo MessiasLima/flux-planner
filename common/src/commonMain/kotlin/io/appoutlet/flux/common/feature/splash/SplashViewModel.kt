@@ -13,6 +13,7 @@ class SplashViewModel(
     private val splashOrchestrator: SplashOrchestrator,
     private val splashUiStateMapper: SplashUiStateMapper,
 ) : BaseViewModel() {
+
     private val splashRetryTrigger = RetryTrigger()
 
     val uiState = retryableFlow(splashRetryTrigger) {
@@ -23,6 +24,15 @@ class SplashViewModel(
                 val errorState = splashUiStateMapper.map(it)
                 emit(errorState)
             }
+    }
+
+    fun tryAgain() {
+        splashRetryTrigger.retry()
+    }
+
+    fun logOut() {
+        splashOrchestrator.logOut()
+        tryAgain()
     }
 }
 

@@ -60,8 +60,8 @@ fun CreateAccountView(karavel: Karavel?, viewModel: CreateAccountViewModel, onSu
 
 private fun isReadyToSubmit(isLoading: Boolean, email: InputValue, password: InputValue): Boolean {
     return (!isLoading) &&
-        email.value.isNotBlank() && email.isValid &&
-        password.value.isNotBlank() && password.isValid
+            email.value.isNotBlank() && email.isValid &&
+            password.value.isNotBlank() && password.isValid
 }
 
 @Composable
@@ -106,7 +106,7 @@ private fun CreateAccountContent(viewModel: CreateAccountViewModel, uiState: Cre
             enabled = !isLoading,
             leadingIcon = Icons.Flux.AccountCircle
         )
-        TextFieldErrorMessage(!name.isValid, "Invalid name")
+        TextFieldErrorMessage(show = !name.isValid, message = "Invalid name")
 
         DefaultTextField(
             modifier = Modifier.fillMaxWidth().padding(top = Spacing.VerySmall),
@@ -117,7 +117,7 @@ private fun CreateAccountContent(viewModel: CreateAccountViewModel, uiState: Cre
             enabled = !isLoading,
             leadingIcon = Icons.Flux.Mail,
         )
-        TextFieldErrorMessage(!email.isValid, "Invalid email")
+        TextFieldErrorMessage(show = !email.isValid, message = "Invalid email")
 
         PasswordTextField(
             modifier = Modifier.fillMaxWidth().padding(top = Spacing.VerySmall),
