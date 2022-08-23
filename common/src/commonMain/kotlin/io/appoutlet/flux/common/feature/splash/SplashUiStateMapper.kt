@@ -4,8 +4,10 @@ import io.appoutlet.flux.common.domain.user.UserDomain
 import io.appoutlet.flux.common.feature.splash.exception.UserNotLoggedException
 
 class SplashUiStateMapper {
-    fun map(user: UserDomain): SplashUiState {
-        return SplashUiState.Logged
+    fun map(user: UserDomain) = if (user.registered) {
+        SplashUiState.Logged
+    } else {
+        SplashUiState.EmailNotValidated
     }
 
     fun map(throwable: Throwable) = when (throwable) {

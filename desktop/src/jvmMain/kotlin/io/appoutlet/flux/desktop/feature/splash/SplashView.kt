@@ -68,7 +68,6 @@ fun SplashView(viewModel: SplashViewModel = koin.get(), karavel: Karavel?) {
                 show = isError,
                 message = "Occurred an error when verifying the logged user"
             )
-
         }
     }
 }
