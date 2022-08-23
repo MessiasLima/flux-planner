@@ -30,6 +30,7 @@ class AuthenticationInteractorTest : UnitTest<AuthenticationInteractor>() {
     private val mockUpdateProfileRequestMapper: UpdateProfileRequestMapper = mockk()
     private val mockSendEmailConfirmationRequestMapper: SendEmailConfirmationRequestMapper = mockk()
     private val mockSignUpWithEmailRequestMapper: SignUpWithEmailRequestMapper = mockk()
+    private val mockLookUpRequestMapper: LookUpRequestMapper = mockk()
 
     override fun buildSut() = AuthenticationInteractor(
         authenticationApi = mockAuthenticationApi,
@@ -38,6 +39,7 @@ class AuthenticationInteractorTest : UnitTest<AuthenticationInteractor>() {
         updateProfileRequestMapper = mockUpdateProfileRequestMapper,
         sendEmailConfirmationRequestMapper = mockSendEmailConfirmationRequestMapper,
         sighUpWithEmailRequestMapper = mockSignUpWithEmailRequestMapper,
+        lookUpRequestMapper = mockLookUpRequestMapper
     )
 
     @Test
