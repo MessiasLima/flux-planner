@@ -5,6 +5,7 @@ import io.appoutlet.flux.common.domain.user.UserDomain
 import io.appoutlet.flux.common.domain.user.UserDomainMapper
 import kotlinx.coroutines.flow.flow
 
+@Suppress("LongParameterList")
 class AuthenticationInteractor(
     private val authenticationApi: AuthenticationApi,
     private val authenticationRequestMapper: AuthenticationRequestMapper,

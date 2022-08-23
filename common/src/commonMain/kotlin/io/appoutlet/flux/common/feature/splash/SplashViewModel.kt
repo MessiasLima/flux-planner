@@ -37,6 +37,7 @@ class SplashViewModel(
 }
 
 sealed class SplashUiState {
+    object Idle : SplashUiState()
     object Loading : SplashUiState()
     object Logged : SplashUiState()
     object EmailNotVerified : SplashUiState()

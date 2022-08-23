@@ -50,8 +50,8 @@ class AuthenticationApi(private val httpClient: HttpClient) {
         return httpResponse.getResult()
     }
 
-    suspend fun lookUp(lookUpRequest: LookUpRequest) : LookUpResponse {
-        val httpResponse = httpClient.post(urlString = Route.Accounts.lookUp()){
+    suspend fun lookUp(lookUpRequest: LookUpRequest): LookUpResponse {
+        val httpResponse = httpClient.post(urlString = Route.Accounts.lookUp()) {
             setupRequest()
             setBody(lookUpRequest)
         }

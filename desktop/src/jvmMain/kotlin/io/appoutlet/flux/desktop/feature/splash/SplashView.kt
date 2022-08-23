@@ -28,8 +28,6 @@ import io.appoutlet.flux.common.feature.splash.SplashViewModel
 import io.appoutlet.flux.desktop.common.FluxImages
 import io.appoutlet.flux.desktop.common.components.FluxProgressBar
 import io.appoutlet.flux.desktop.common.components.TextFieldErrorMessage
-import io.appoutlet.flux.desktop.common.initialize
-import io.appoutlet.flux.desktop.di.koin
 import io.appoutlet.flux.desktop.feature.emailverification.EmailVerificationPage
 import io.appoutlet.flux.desktop.feature.login.LoginPage
 import io.appoutlet.flux.desktop.feature.notes.NotesPage
@@ -40,10 +38,8 @@ import kotlinx.coroutines.FlowPreview
 @ExperimentalFoundationApi
 @FlowPreview
 @Composable
-fun SplashView(viewModel: SplashViewModel = koin.get(), karavel: Karavel?) {
-    viewModel.initialize()
-
-    val uiState by viewModel.uiState.collectAsState(initial = SplashUiState.Loading)
+fun SplashView(viewModel: SplashViewModel, karavel: Karavel?) {
+    val uiState by viewModel.uiState.collectAsState(SplashUiState.Idle)
 
     verifyUiStateAndNavigate(uiState = uiState, karavel = karavel)
 
@@ -70,9 +66,11 @@ fun SplashView(viewModel: SplashViewModel = koin.get(), karavel: Karavel?) {
 
             FluxProgressBar(isLoading = isLoading)
 
-            ErrorMessage(isError, onLogoutClicked = { viewModel.logOut()}, onTryAgainClicked = {
-                viewModel.tryAgain()
-            })
+            ErrorMessage(
+                onError = isError,
+                onLogoutClicked = { viewModel.logOut() },
+                onTryAgainClicked = { viewModel.tryAgain() },
+            )
         }
     }
 }

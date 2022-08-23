@@ -60,8 +60,8 @@ fun CreateAccountView(karavel: Karavel?, viewModel: CreateAccountViewModel, onSu
 
 private fun isReadyToSubmit(isLoading: Boolean, email: InputValue, password: InputValue): Boolean {
     return (!isLoading) &&
-            email.value.isNotBlank() && email.isValid &&
-            password.value.isNotBlank() && password.isValid
+        email.value.isNotBlank() && email.isValid &&
+        password.value.isNotBlank() && password.isValid
 }
 
 @Composable
