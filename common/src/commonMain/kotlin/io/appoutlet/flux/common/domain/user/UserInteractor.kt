@@ -14,4 +14,11 @@ class UserInteractor(
 
         return userDomainMapper.map(savedUser)
     }
+
+    fun findAll() = userRepository.findAll()
+        .map { userDomainMapper.map(it) }
+
+    fun deleteAll() {
+        userRepository.deleteAll()
+    }
 }

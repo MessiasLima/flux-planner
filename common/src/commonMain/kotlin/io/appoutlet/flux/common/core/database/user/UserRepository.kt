@@ -20,4 +20,8 @@ class UserRepository(
 
         return database.userEntityQueries.findById(userEntity.id).executeAsOne()
     }
+
+    fun deleteAll() {
+        database.userEntityQueries.deleteAll()
+    }
 }
