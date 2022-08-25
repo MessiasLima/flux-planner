@@ -18,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import io.appoutlet.flux.common.core.ui.Spacing
 import io.appoutlet.flux.common.feature.createaccount.CreateAccountUiState
 import io.appoutlet.flux.common.feature.createaccount.CreateAccountViewModel
@@ -97,34 +98,24 @@ private fun CreateAccountContent(viewModel: CreateAccountViewModel, uiState: Cre
         val password by viewModel.password.collectAsState()
         val passwordConfirmation by viewModel.passwordConfirmation.collectAsState()
 
-        DefaultTextField(
-            modifier = Modifier.fillMaxWidth().padding(top = Spacing.Small),
-            value = name.value,
-            onValueChange = { viewModel.onNameChange(it) },
+        CreateAccountFormControl(
+            modifier = Modifier.padding(top = Spacing.Small),
+            inputValue = name,
+            isLoading = isLoading,
             label = "Name",
-            error = !name.isValid,
-            enabled = !isLoading,
-            leadingIcon = Icons.Flux.AccountCircle
-        )
-        TextFieldErrorMessage(
-            modifier = Modifier.fillMaxWidth(),
-            show = !name.isValid,
-            message = "Invalid name"
+            errorMessage = "Invalid name",
+            leadingIcon = Icons.Flux.AccountCircle,
+            onValueChange = { viewModel.onNameChange(it) }
         )
 
-        DefaultTextField(
-            modifier = Modifier.fillMaxWidth().padding(top = Spacing.VerySmall),
-            value = email.value,
-            onValueChange = { viewModel.onEmailChange(it) },
+        CreateAccountFormControl(
+            modifier = Modifier.padding(top = Spacing.VerySmall),
+            inputValue = email,
+            isLoading = isLoading,
             label = "Email",
-            error = !email.isValid,
-            enabled = !isLoading,
+            errorMessage = "Invalid email",
             leadingIcon = Icons.Flux.Mail,
-        )
-        TextFieldErrorMessage(
-            modifier = Modifier.fillMaxWidth(),
-            show = !email.isValid,
-            message = "Invalid email"
+            onValueChange = { viewModel.onEmailChange(it) },
         )
 
         PasswordTextField(
@@ -154,6 +145,34 @@ private fun CreateAccountContent(viewModel: CreateAccountViewModel, uiState: Cre
             onClick = { viewModel.submit() },
         ) { Text("CREATE ACCOUNT") }
     }
+}
+
+@ExperimentalComposeUiApi
+@Composable
+private fun CreateAccountFormControl(
+    modifier: Modifier = Modifier,
+    inputValue: InputValue,
+    isLoading: Boolean,
+    label: String,
+    errorMessage: String,
+    leadingIcon: Painter,
+    onValueChange: (String) -> Unit,
+) {
+    DefaultTextField(
+        modifier = modifier.fillMaxWidth(),
+        value = inputValue.value,
+        onValueChange = onValueChange,
+        label = label,
+        error = !inputValue.isValid,
+        enabled = !isLoading,
+        leadingIcon = leadingIcon,
+    )
+
+    TextFieldErrorMessage(
+        modifier = Modifier.fillMaxWidth(),
+        show = !inputValue.isValid,
+        message = errorMessage
+    )
 }
 
 @ExperimentalComposeUiApi
