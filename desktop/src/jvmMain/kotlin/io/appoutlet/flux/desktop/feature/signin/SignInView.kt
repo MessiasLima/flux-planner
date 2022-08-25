@@ -103,7 +103,11 @@ private fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, mainKarave
                 error = isError
             )
 
-            TextFieldErrorMessage(show = isError, message = "Please verify your login and password")
+            TextFieldErrorMessage(
+                modifier = Modifier.fillMaxWidth(),
+                show = isError,
+                message = "Please verify your login and password",
+            )
 
             Spacer(modifier = Modifier.height(Spacing.Medium))
 

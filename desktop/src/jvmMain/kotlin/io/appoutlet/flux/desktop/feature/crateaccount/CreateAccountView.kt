@@ -106,7 +106,11 @@ private fun CreateAccountContent(viewModel: CreateAccountViewModel, uiState: Cre
             enabled = !isLoading,
             leadingIcon = Icons.Flux.AccountCircle
         )
-        TextFieldErrorMessage(show = !name.isValid, message = "Invalid name")
+        TextFieldErrorMessage(
+            modifier = Modifier.fillMaxWidth(),
+            show = !name.isValid,
+            message = "Invalid name"
+        )
 
         DefaultTextField(
             modifier = Modifier.fillMaxWidth().padding(top = Spacing.VerySmall),
@@ -117,7 +121,11 @@ private fun CreateAccountContent(viewModel: CreateAccountViewModel, uiState: Cre
             enabled = !isLoading,
             leadingIcon = Icons.Flux.Mail,
         )
-        TextFieldErrorMessage(show = !email.isValid, message = "Invalid email")
+        TextFieldErrorMessage(
+            modifier = Modifier.fillMaxWidth(),
+            show = !email.isValid,
+            message = "Invalid email"
+        )
 
         PasswordTextField(
             modifier = Modifier.fillMaxWidth().padding(top = Spacing.VerySmall),
@@ -157,6 +165,7 @@ private fun MainErrorMessage(passwordIsValid: Boolean, isError: Boolean) {
         "The passwords are not equal"
     }
     TextFieldErrorMessage(
+        modifier = Modifier.fillMaxWidth(),
         show = (!passwordIsValid) || isError,
         message = errorMessage,
     )
