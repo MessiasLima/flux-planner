@@ -59,7 +59,7 @@ class UserRepositoryTest : UnitTest<UserRepository>() {
     }
 
     @Test
-    fun `should delete all`()  {
+    fun `should delete all`() {
         every { mockUserEntityQueries.deleteAll() } returns Unit
 
         sut.deleteAll()
