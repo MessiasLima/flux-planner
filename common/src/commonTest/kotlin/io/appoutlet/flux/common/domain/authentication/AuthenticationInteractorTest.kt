@@ -3,6 +3,8 @@ package io.appoutlet.flux.common.domain.authentication
 import io.appoutlet.flux.common.core.network.authentication.AuthenticationApi
 import io.appoutlet.flux.common.core.network.authentication.AuthenticationRequest
 import io.appoutlet.flux.common.core.network.authentication.AuthenticationResponse
+import io.appoutlet.flux.common.core.network.authentication.LookUpRequest
+import io.appoutlet.flux.common.core.network.authentication.LookUpResponse
 import io.appoutlet.flux.common.core.network.authentication.SendEmailConfirmationRequest
 import io.appoutlet.flux.common.core.network.authentication.SendEmailConfirmationResponse
 import io.appoutlet.flux.common.core.network.authentication.SignUpWithEmailRequest
@@ -139,5 +141,25 @@ class AuthenticationInteractorTest : UnitTest<AuthenticationInteractor>() {
                 fixtSendEmailConfirmationRequest
             )
         }
+    }
+
+    @Test
+    fun `should look up for an account`() = runTest {
+        val fixtUserDomain: UserDomain = fixture()
+        val fixtLookUpRequest: LookUpRequest = fixture()
+        val fixtLookUpResponse: LookUpResponse = fixture()
+
+        every { mockLookUpRequestMapper.map(fixtUserDomain) } returns fixtLookUpRequest
+        coEvery { mockAuthenticationApi.lookUp(fixtLookUpRequest) } returns fixtLookUpResponse
+        every {
+            mockUserDomainMapper.map(
+                userDomain = fixtUserDomain,
+                lookUpResponse = fixtLookUpResponse
+            )
+        } returns fixtUserDomain
+
+        val actual = sut.lookUp(user = fixtUserDomain)
+
+        assertEquals(fixtUserDomain, actual)
     }
 }
