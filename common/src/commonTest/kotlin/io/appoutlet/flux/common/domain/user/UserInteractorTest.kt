@@ -52,7 +52,7 @@ class UserInteractorTest : UnitTest<UserInteractor>() {
     }
 
     @Test
-    fun `should delete all`(){
+    fun `should delete all`() {
         every { mockUserRepository.deleteAll() } returns Unit
 
         sut.deleteAll()

@@ -6,7 +6,7 @@ import io.appoutlet.flux.common.test.UnitTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-internal class SplashUiStateMapperTest : UnitTest<SplashUiStateMapper>(){
+internal class SplashUiStateMapperTest : UnitTest<SplashUiStateMapper>() {
     override fun buildSut() = SplashUiStateMapper()
 
     @Test
