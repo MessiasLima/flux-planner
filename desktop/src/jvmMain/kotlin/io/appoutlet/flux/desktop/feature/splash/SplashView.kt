@@ -21,6 +21,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import io.appoutlet.flux.common.core.ui.Spacing
 import io.appoutlet.flux.common.feature.splash.SplashUiState
@@ -104,11 +106,23 @@ fun ErrorMessage(onError: Boolean, onLogoutClicked: () -> Unit, onTryAgainClicke
 
     Spacer(modifier = Modifier.height(Spacing.Medium))
 
-    Button(modifier = Modifier.alpha(buttonsAlpha), onClick = onTryAgainClicked) {
+    Button(
+        modifier = Modifier.alpha(buttonsAlpha)
+            .semantics { if (!onError) set(SemanticsProperties.InvisibleToUser, Unit) },
+        onClick = onTryAgainClicked
+    ) {
         Text("Try again")
     }
 
-    TextButton(modifier = Modifier.alpha(buttonsAlpha), onClick = onLogoutClicked) {
+    TextButton(
+        modifier = Modifier.alpha(buttonsAlpha).semantics {
+            if (!onError) set(
+                SemanticsProperties.InvisibleToUser,
+                Unit
+            )
+        },
+        onClick = onLogoutClicked
+    ) {
         Text("Login with another user")
     }
 }

@@ -3,6 +3,9 @@ package io.appoutlet.flux.desktop.feature.splash
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.printToString
 import io.appoutlet.flux.common.feature.splash.SplashUiState
 import io.appoutlet.flux.common.feature.splash.SplashViewModel
 import io.appoutlet.flux.desktop.testingutils.UiTest
@@ -34,15 +37,17 @@ internal class SplashViewKtTest : UiTest() {
             .assertExists()
             .assertIsInvisibleToUser()
 
-        composeTestRule.onNodeWithContentDescription("Occurred an error when verifying the logged user")
+        println(composeTestRule.onRoot().printToString())
+
+        composeTestRule.onNodeWithText("Occurred an error when verifying the logged user")
             .assertExists()
             .assertIsInvisibleToUser()
 
-        composeTestRule.onNodeWithContentDescription("Try again")
+        composeTestRule.onNodeWithText("Try again")
             .assertExists()
             .assertIsInvisibleToUser()
 
-        composeTestRule.onNodeWithContentDescription("Login with another user")
+        composeTestRule.onNodeWithText("Login with another user")
             .assertExists()
             .assertIsInvisibleToUser()
     }
