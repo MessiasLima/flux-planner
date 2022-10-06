@@ -1,6 +1,7 @@
 package io.appoutlet.flux.common.domain.user
 
 import io.appoutlet.flux.common.core.database.user.UserRepository
+import io.appoutlet.flux.common.feature.splash.exception.UserNotLoggedException
 
 class UserInteractor(
     private val userRepository: UserRepository,
@@ -17,6 +18,11 @@ class UserInteractor(
 
     fun findAll() = userRepository.findAll()
         .map { userDomainMapper.map(it) }
+
+    fun getLoggedUser(): UserDomain {
+        val userEntity = userRepository.findAll().firstOrNull() ?: throw UserNotLoggedException("No user logged")
+        return userDomainMapper.map(userEntity)
+    }
 
     fun deleteAll() {
         userRepository.deleteAll()
