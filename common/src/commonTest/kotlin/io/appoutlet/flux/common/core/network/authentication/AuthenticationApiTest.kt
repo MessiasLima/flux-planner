@@ -31,43 +31,57 @@ class AuthenticationApiTest : UnitTest<AuthenticationApi>(), ApiTest by ApiTestI
 
     @Test
     fun `should sign up with email`() = runTest {
-        val mockSignUpWithEmailRequest: SignUpWithEmailRequest = fixture()
-        val mockSignUpWithEmailResponse: SignUpWithEmailResponse = fixture()
+        val fixtSignUpWithEmailRequest: SignUpWithEmailRequest = fixture()
+        val fixtSignUpWithEmailResponse: SignUpWithEmailResponse = fixture()
 
         addResponseResolver(Route.Accounts.signUp() + "?key=" + AuthenticationApi.SIGN_IN_API_KEY) {
-            respond(content = mockSignUpWithEmailResponse)
+            respond(content = fixtSignUpWithEmailResponse)
         }
 
-        val actual = sut.signUpWithEmail(mockSignUpWithEmailRequest)
+        val actual = sut.signUpWithEmail(fixtSignUpWithEmailRequest)
 
-        assertEquals(actual, mockSignUpWithEmailResponse)
+        assertEquals(actual, fixtSignUpWithEmailResponse)
     }
 
     @Test
     fun `should update profile`() = runTest {
-        val mockUpdateProfileRequest: UpdateProfileRequest = fixture()
-        val mockUpdateProfileResponse: UpdateProfileResponse = fixture()
+        val fixtUpdateProfileRequest: UpdateProfileRequest = fixture()
+        val fixtUpdateProfileResponse: UpdateProfileResponse = fixture()
 
         addResponseResolver(Route.Accounts.updateProfile() + "?key=" + AuthenticationApi.SIGN_IN_API_KEY) {
-            respond(content = mockUpdateProfileResponse)
+            respond(content = fixtUpdateProfileResponse)
         }
 
-        val actual = sut.updateProfile(mockUpdateProfileRequest)
+        val actual = sut.updateProfile(fixtUpdateProfileRequest)
 
-        assertEquals(actual, mockUpdateProfileResponse)
+        assertEquals(actual, fixtUpdateProfileResponse)
     }
 
     @Test
     fun `should send email confirmation`() = runTest {
-        val mockSendEmailConfirmationRequest: SendEmailConfirmationRequest = fixture()
-        val mockSendEmailConfirmationResponse: SendEmailConfirmationResponse = fixture()
+        val fixtSendEmailConfirmationRequest: SendEmailConfirmationRequest = fixture()
+        val fixtSendEmailConfirmationResponse: SendEmailConfirmationResponse = fixture()
 
         addResponseResolver(Route.Accounts.sendEmailConfirmation() + "?key=" + AuthenticationApi.SIGN_IN_API_KEY) {
-            respond(content = mockSendEmailConfirmationResponse)
+            respond(content = fixtSendEmailConfirmationResponse)
         }
 
-        val actual = sut.sendEmailConfirmation(mockSendEmailConfirmationRequest)
+        val actual = sut.sendEmailConfirmation(fixtSendEmailConfirmationRequest)
 
-        assertEquals(actual, mockSendEmailConfirmationResponse)
+        assertEquals(fixtSendEmailConfirmationResponse, actual)
+    }
+
+    @Test
+    fun `should look up for an account`() = runTest {
+        val fixtLookUpRequest: LookUpRequest = fixture()
+        val fixtLookUpResponse: LookUpResponse = fixture()
+
+        addResponseResolver(url = Route.Accounts.lookUp() + "?key=" + AuthenticationApi.SIGN_IN_API_KEY) {
+            respond(content = fixtLookUpResponse)
+        }
+
+        val actual = sut.lookUp(lookUpRequest = fixtLookUpRequest)
+
+        assertEquals(fixtLookUpResponse, actual)
     }
 }

@@ -50,6 +50,15 @@ class AuthenticationApi(private val httpClient: HttpClient) {
         return httpResponse.getResult()
     }
 
+    suspend fun lookUp(lookUpRequest: LookUpRequest): LookUpResponse {
+        val httpResponse = httpClient.post(urlString = Route.Accounts.lookUp()) {
+            setupRequest()
+            setBody(lookUpRequest)
+        }
+
+        return httpResponse.getResult()
+    }
+
     private fun HttpRequestBuilder.setupRequest() {
         parameter("key", SIGN_IN_API_KEY)
         contentType(ContentType.Application.Json)

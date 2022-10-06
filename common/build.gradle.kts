@@ -117,7 +117,7 @@ apply(from = "$rootDir/scripts/detekt.gradle")
 // region kover setup
 val includePatterns = listOf("io.appoutlet.flux.*")
 val excludePatterns = listOf(
-    "*.*Test",
+    "**Test",
     "**BuildConfig**",
     "**ModuleKt**",
     "*.generated.*",

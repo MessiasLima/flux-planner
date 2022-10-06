@@ -5,7 +5,9 @@ import io.appoutlet.flux.common.core.database.user.UserRepository
 import io.appoutlet.flux.common.test.UnitTest
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import kotlin.test.Test
+import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 
 class UserInteractorTest : UnitTest<UserInteractor>() {
@@ -31,5 +33,30 @@ class UserInteractorTest : UnitTest<UserInteractor>() {
         val actual = sut.save(fixtUserDomain)
 
         assertEquals(fixtUserDomain, actual)
+    }
+
+    @Test
+    fun `should find all`() {
+        val fixtUserEntities: List<UserEntity> = fixture()
+        val fixtUserDomains: List<UserDomain> = fixture()
+
+        fixtUserEntities.onEachIndexed { index, userEntity ->
+            every { mockUserDomainMapper.map(userEntity) } returns fixtUserDomains[index]
+        }
+
+        every { mockUserRepository.findAll() } returns fixtUserEntities
+
+        val actual = sut.findAll()
+
+        assertContentEquals(expected = fixtUserDomains, actual = actual)
+    }
+
+    @Test
+    fun `should delete all`() {
+        every { mockUserRepository.deleteAll() } returns Unit
+
+        sut.deleteAll()
+
+        verify { mockUserRepository.deleteAll() }
     }
 }

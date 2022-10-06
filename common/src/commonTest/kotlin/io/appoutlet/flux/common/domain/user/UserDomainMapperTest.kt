@@ -2,7 +2,9 @@ package io.appoutlet.flux.common.domain.user
 
 import io.appoutlet.flux.common.core.database.generated.UserEntity
 import io.appoutlet.flux.common.core.network.authentication.AuthenticationResponse
+import io.appoutlet.flux.common.core.network.authentication.LookUpResponse
 import io.appoutlet.flux.common.core.network.authentication.SignUpWithEmailResponse
+import io.appoutlet.flux.common.feature.splash.exception.UserNotLoggedException
 import io.appoutlet.flux.common.test.UnitTest
 import io.appoutlet.flux.common.util.toBoolean
 import kotlin.test.Test
@@ -51,5 +53,30 @@ class UserDomainMapperTest : UnitTest<UserDomainMapper>() {
         assertEquals(fixtSignUpWithEmailResponse.idToken, actual.idToken)
         assertEquals(fixtSignUpWithEmailResponse.refreshToken, actual.refreshToken)
         assertEquals(false, actual.registered)
+    }
+
+    @Test
+    fun `should map from LookUpResponse`() {
+        val fixtUserDomain: UserDomain = fixture()
+        val fixtLookUpResponse: LookUpResponse = fixture()
+
+        val actual = sut.map(userDomain = fixtUserDomain, lookUpResponse = fixtLookUpResponse)
+
+        val userResponse = fixtLookUpResponse.users.first()
+
+        assertEquals(userResponse.localId, actual.id)
+        assertEquals(userResponse.email, actual.email)
+        assertEquals(userResponse.displayName, actual.displayName)
+        assertEquals(fixtUserDomain.idToken, actual.idToken)
+        assertEquals(fixtUserDomain.refreshToken, actual.refreshToken)
+        assertEquals(userResponse.emailVerified, actual.registered)
+    }
+
+    @Test(expected = UserNotLoggedException::class)
+    fun `should throw exception when lookup response don't return any user`() {
+        val fixtUserDomain: UserDomain = fixture()
+        val fixtLookUpResponse: LookUpResponse = fixture<LookUpResponse>().copy(users = emptyList())
+
+        sut.map(userDomain = fixtUserDomain, lookUpResponse = fixtLookUpResponse)
     }
 }

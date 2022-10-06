@@ -5,6 +5,7 @@ import io.appoutlet.flux.common.domain.user.UserDomain
 import io.appoutlet.flux.common.domain.user.UserDomainMapper
 import kotlinx.coroutines.flow.flow
 
+@Suppress("LongParameterList")
 class AuthenticationInteractor(
     private val authenticationApi: AuthenticationApi,
     private val authenticationRequestMapper: AuthenticationRequestMapper,
@@ -12,6 +13,7 @@ class AuthenticationInteractor(
     private val updateProfileRequestMapper: UpdateProfileRequestMapper,
     private val sendEmailConfirmationRequestMapper: SendEmailConfirmationRequestMapper,
     private val sighUpWithEmailRequestMapper: SignUpWithEmailRequestMapper,
+    private val lookUpRequestMapper: LookUpRequestMapper,
 ) {
     fun signIn(email: String, password: String) = flow {
         val authenticationRequest = authenticationRequestMapper.map(email, password)
@@ -35,5 +37,11 @@ class AuthenticationInteractor(
     suspend fun sendEmailConfirmation(user: UserDomain) {
         val sendEmailConfirmationRequest = sendEmailConfirmationRequestMapper.map(user)
         authenticationApi.sendEmailConfirmation(sendEmailConfirmationRequest)
+    }
+
+    suspend fun lookUp(user: UserDomain): UserDomain {
+        val lookUpRequest = lookUpRequestMapper.map(user)
+        val lookUpResponse = authenticationApi.lookUp(lookUpRequest)
+        return userDomainMapper.map(userDomain = user, lookUpResponse = lookUpResponse)
     }
 }

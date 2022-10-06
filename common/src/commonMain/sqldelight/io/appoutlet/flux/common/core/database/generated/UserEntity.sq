@@ -15,3 +15,6 @@ SELECT * FROM UserEntity WHERE id = ?;
 
 save:
 INSERT OR REPLACE INTO UserEntity VALUES (?,?,?,?,?,?);
+
+deleteAll:
+DELETE FROM UserEntity;

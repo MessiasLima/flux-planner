@@ -37,6 +37,7 @@ import io.appoutlet.flux.desktop.feature.crateaccount.CreateAccountPage
 import io.appoutlet.flux.desktop.feature.passwordrecovery.PasswordRecoveryPage
 import io.appoutlet.flux.desktop.feature.splash.SplashPage
 import io.appoutlet.karavel.Karavel
+import io.appoutlet.karavel.Page
 import kotlinx.coroutines.FlowPreview
 
 @ExperimentalComposeUiApi
@@ -49,21 +50,35 @@ fun SignInView(
     viewModel: SignInViewModel = koin.get(),
 ) {
     viewModel.initialize()
-    SignInForm(viewModel, karavel, mainKaravel)
+    val uiState: SignInUiState by viewModel.uiState.collectAsState(initial = SignInUiState.Idle)
+    val isLoading = uiState is SignInUiState.Loading
+    val isError = uiState is SignInUiState.Error
+    val isSuccess = uiState is SignInUiState.Success
+
+    if (isSuccess) mainKaravel?.navigate(SplashPage())
+
+    SignInForm(
+        mainKaravel = mainKaravel,
+        isLoading = isLoading,
+        isError = isError,
+        navigate = { karavel?.navigate(it) },
+        onLoginClicked = { email, password -> viewModel.login(email, password) }
+    )
 }
 
 @ExperimentalComposeUiApi
 @ExperimentalFoundationApi
 @FlowPreview
 @Composable
-private fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, mainKaravel: Karavel?) {
+private fun SignInForm(
+    mainKaravel: Karavel?,
+    isLoading: Boolean,
+    isError: Boolean,
+    navigate: (page: Page) -> Unit,
+    onLoginClicked: (email: String, password: String) -> Unit
+) {
     Box {
-        val uiState: SignInUiState by viewModel.uiState.collectAsState(initial = SignInUiState.Idle)
-        val isLoading = uiState is SignInUiState.Loading
-        val isError = uiState is SignInUiState.Error
-
         if (isLoading) LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-        if (uiState is SignInUiState.Success) mainKaravel?.navigate(SplashPage())
 
         Column(
             modifier = Modifier.padding(Spacing.Medium),
@@ -103,13 +118,17 @@ private fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, mainKarave
                 error = isError
             )
 
-            TextFieldErrorMessage(isError, "Please verify your login and password")
+            TextFieldErrorMessage(
+                modifier = Modifier.fillMaxWidth(),
+                show = isError,
+                message = "Please verify your login and password",
+            )
 
             Spacer(modifier = Modifier.height(Spacing.Medium))
 
             Button(
                 modifier = Modifier.width(159.dp),
-                onClick = { viewModel.login(email, password) },
+                onClick = { onLoginClicked(email, password) },
                 enabled = !isLoading,
             ) { Text(text = "SIGN IN", style = MaterialTheme.typography.titleSmall) }
 
@@ -117,12 +136,12 @@ private fun SignInForm(viewModel: SignInViewModel, karavel: Karavel?, mainKarave
 
             TextButton(
                 enabled = !isLoading,
-                onClick = { karavel?.navigate(CreateAccountPage(mainKaravel)) },
+                onClick = { navigate(CreateAccountPage(mainKaravel)) },
             ) { Text("Create account") }
 
             TextButton(
                 enabled = !isLoading,
-                onClick = { karavel?.navigate(PasswordRecoveryPage()) },
+                onClick = { navigate(PasswordRecoveryPage()) },
             ) { Text("Forgot password") }
         }
     }

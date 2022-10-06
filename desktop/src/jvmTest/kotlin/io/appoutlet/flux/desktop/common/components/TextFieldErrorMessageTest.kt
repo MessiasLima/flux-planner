@@ -14,7 +14,7 @@ class TextFieldErrorMessageTest : UiTest() {
         val message = "My error message"
 
         composeTestRule.setContent {
-            TextFieldErrorMessage(true, message)
+            TextFieldErrorMessage(show = true, message = message)
         }
 
         composeTestRule.onNodeWithText(message)
@@ -27,7 +27,7 @@ class TextFieldErrorMessageTest : UiTest() {
         val message = "My error message"
 
         composeTestRule.setContent {
-            TextFieldErrorMessage(false, message)
+            TextFieldErrorMessage(show = false, message = message)
         }
 
         composeTestRule.onNodeWithText(message)
