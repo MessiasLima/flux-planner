@@ -13,7 +13,6 @@ import androidx.compose.material.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.appoutlet.flux.common.core.ui.Spacing
@@ -27,32 +26,16 @@ fun NotesView() {
         }
 
         Card(
-            modifier = Modifier.width(428.dp).fillMaxHeight(),
+            modifier = Modifier.width(250.dp).fillMaxHeight(),
             backgroundColor = MaterialTheme.colorScheme.primaryContainer,
             shape = shapeMedium.copy(topEnd = CornerSize(0), bottomEnd = CornerSize(0))
         ) {
-            Column(modifier = Modifier.padding(horizontal = Spacing.Medium).padding(top = 49.dp)) {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = shapeMedium
-                ) {
-                    Column(
-                        modifier = Modifier.padding(vertical = Spacing.Large),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text("11:04", style = MaterialTheme.typography.bodyLarge)
-                        Text("Monday , April 11", style = MaterialTheme.typography.bodyMedium)
-                    }
-                }
+            Column(modifier = Modifier.padding(all = Spacing.Small)) {
+                DateCard(modifier = Modifier.fillMaxWidth())
 
-                Spacer(modifier = Modifier.height(65.dp))
+                Spacer(modifier = Modifier.height(Spacing.Small))
 
-                Card(
-                    modifier = Modifier.fillMaxWidth().height(200.dp),
-                    shape = shapeMedium
-                ) {
-                    Text("Calendario", style = MaterialTheme.typography.bodyLarge)
-                }
+                CalendarCard(modifier = Modifier.fillMaxWidth())
             }
         }
     }
